@@ -1,0 +1,87 @@
+@(title: String, bodyClass:String="")(content: Html)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>SUPERGLOT | @title</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("vendor/chosen/chosen.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.at("images/favicon.png")">
+        <script src="@routes.Assets.at("vendor/jquery-1.9.1.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("vendor/chosen/chosen.jquery.min.js")" type="text/javascript"></script>
+        <script src="@routes.Assets.at("javascripts/main.js")"></script>
+        <script>
+            $( function() {
+            $('select').not('.not-chosen').chosen();
+            });
+        </script>
+    </head>
+    <body class="@bodyClass">
+
+        <nav class="top-bar">
+            <ul class="title-area">
+                    <!-- Title Area -->
+                <li class="name">
+                    <h1><a href="/">SUPERGLOT</a></h1>
+                </li>
+
+                    <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+                    <!-- Left Nav Section -->
+                <ul class="left">
+                    @if(context.isAuthenticated) {
+
+                    } else {
+                        <li><a href="/about">about</a></li>
+                    }
+
+                    <li class="divider"></li>
+
+                </ul>
+
+                    <!-- Right Nav Section -->
+                <ul class="right">
+                    @if(context.isAuthenticated) {
+                        <li class="divider show-for-small"></li>
+                        <li><a href="@routes.Auth.deauthenticate">log out</a></li>
+                    } else {
+                        <li><a href="@routes.Auth.login">log in</a></li>
+                        <li><a href="@routes.Auth.signup">sign up</a></li>
+                    }
+                        <!--
+                    <li class="has-form">
+                        <form>
+                            <div class="row collapse">
+                                <div class="small-8 columns">
+                                    <input type="text">
+                                </div>
+                                <div class="small-4 columns">
+                                    <a href="#" class="alert button">Search</a>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                    -->
+                    <li class="divider show-for-small"></li>
+                </ul>
+            </section>
+        </nav>
+
+        <div class="container">
+            <div class="row">
+                <div class="twelve columns">
+                    <div class="messages">
+                    @views.html._flashes(request.flash)
+                    </div>
+                </div>
+            </div>
+            <div class="content-wrapper">
+            @content
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,15 @@
+@(form:Form[_])
+
+@helper.form(routes.Auth.authenticate) {
+
+    @helper.inputText(form("email"))
+    @helper.inputPassword(form("password"))
+    <input type="hidden" name="referrer" value="@request.uri" />
+
+    @form.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }
+    <input type="submit" />
+}

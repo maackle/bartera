@@ -1,6 +1,6 @@
 package models
 
-import org.squeryl.{KeyedEntity, Table, Schema}
+import org.squeryl.{PrimitiveTypeMode, KeyedEntity, Table, Schema}
 import org.squeryl.dsl._
 import org.squeryl.PrimitiveTypeMode._
 
@@ -20,7 +20,7 @@ trait IdPK extends KeyedEntity[Long] {
 }
 
 
-trait MetaModel[T] {
+trait MetaModel[T] extends PrimitiveTypeMode {
 	val table:Table[T]
 
 }

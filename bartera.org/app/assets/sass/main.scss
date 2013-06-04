@@ -1,0 +1,168 @@
+@import "vars";
+@import "mixins";
+@import "app";
+
+.no-show {
+  display: none;
+}
+
+.deprecated * {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+.ajax-post {
+  border: 2px dotted #ff00ff;
+}
+
+.ajax-waiting {
+  background: gray;
+}
+
+.ajax-failed {
+  background: red;
+}
+
+.ajax-toggle-pair {
+
+  .ajax-toggle {
+    display: none;
+  }
+
+  .ajax-toggle-active {
+    display: inherit;
+  }
+}
+
+form {
+  dd.info {
+    font-size: 0.75em;
+    margin-top: -0.75em;
+    float: right;
+    display: inline;
+  }
+  dd.error {
+    display: inline-block;
+  }
+}
+
+.userwords-page {
+
+  .actions {
+    width: 50%;
+    float: right;
+    background: white;
+    border: 3px double #444;
+    margin: 0 0 10px 10px;
+  }
+
+  ul.temp-word-list {
+
+    li {
+      font-size: 0.8em;
+      color: purple;
+      padding: 5px;
+      background: transparentize(purple, 0.82);
+      position: relative;
+      cursor: pointer;
+
+      .definition {
+        display: none;
+        position: absolute;
+        top: 2.7em;
+        left: 0px;
+        width: auto;
+      }
+
+      &:nth-child(odd) {
+        background: transparentize(purple, 0.9);
+      }
+
+      &.learning {
+
+      }
+
+      &.mastered {
+        font-style: italic;
+        background: #ddd;
+        color: #2f4f4f;
+      }
+
+      &:hover {
+        //background: transparentize(black, 0.2);
+        padding: 3px;
+        border: 2px solid transparentize(black, 0.2);
+
+        .definition {
+          display: block;
+          background: transparentize(black, 0.2);
+          padding: 10px;
+          color: white;
+          z-index: 1;
+        }
+      }
+    }
+  }
+
+}
+
+ul {
+  list-style: none;
+
+  &.bulleted {
+    list-style: inherit;
+  }
+}
+
+ul.inline {
+
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+
+}
+
+table {
+  thead.center {
+    th {
+      text-align: center;
+    }
+  }
+}
+
+nav {
+	color: #999;
+	.name {
+		font-size: 1.2em;
+	}
+}
+
+body {
+  background: #eee;
+
+  .content-wrapper {
+    margin-top: 50px;
+  }
+}
+
+.admin-panel {
+  background: $color-admin;
+}
+
+.pairs {
+  .pair {
+    .pair-left {
+      width: 100px;
+      text-align: right;
+      display: inline-block;
+      background: #ddd;
+      padding: 10px;
+      color: #222;
+    }
+    .pair-right {
+      display: inline-block;
+    }
+  }
+}

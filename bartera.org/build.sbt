@@ -8,6 +8,7 @@ libraryDependencies ++= Seq(
 	"com.h2database" % "h2" % "1.3.165",
 	"mysql" % "mysql-connector-java" % "5.1.18",
 	"postgresql" % "postgresql" % "9.1-901.jdbc4",
+	"be.objectify" %% "deadbolt-scala" % "2.0-SNAPSHOT",
 	"com.restfb" % "restfb" % "1.6.11",
 	"commons-codec" % "commons-codec" % "1.7",
 	"org.clapper" %% "grizzled-slf4j" % "1.0.1"

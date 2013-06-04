@@ -1,0 +1,16 @@
+@(form:Form[_])
+
+@helper.form(routes.Auth.register) {
+
+    @helper.inputText(form("email"))
+    @helper.inputPassword(form("password"))
+    @helper.inputPassword(form("password_confirm"))
+
+    @form.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }
+
+    <input type="submit" />
+}
