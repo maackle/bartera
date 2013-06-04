@@ -1,6 +1,6 @@
 package models
 
-import org.squeryl
+import play.api.mvc.{AnyContent, Request, Security}
 
 case class User(
 	email: String,
@@ -8,7 +8,7 @@ case class User(
 	userprofile_id: Long = 0L
 				 ) extends IdPK {
 
-	this() = this("", "", 0L)
+//	this() = this("", "", 0L)
 
 	val username = email
 
@@ -26,8 +26,11 @@ object User extends MetaModel[User] {
 		table.where(_.username === username).headOption
 	}
 
-	def authenticate(email: String, password: String):Option[User] = inTransaction {
-		???
+	def isAuthenticated(implicit request:Request[AnyContent]) = request.session.get(Security.username).flatMap(User.lookupByName(_))
+
+	def authenticate(username: String, password: String):Option[User] = inTransaction {
+		// TODO: use SHA1
+		table.where( u => u.username === username and u.passhash === password ).headOption
 	}
 
 	def register(newUser:User) = inTransaction {
