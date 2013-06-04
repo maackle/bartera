@@ -1,0 +1,18 @@
+@(form:Form[_])(implicit request:Request[_])
+
+@_base("haves") {
+
+    <h1>Haves</h1>
+
+    @helper.form(controllers.user.routes.Haves.add) {
+        @helper.inputText(form("what"))
+        @helper.textarea(form("description"))
+        <input type="submit" />
+    }
+
+    @form.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }
+}

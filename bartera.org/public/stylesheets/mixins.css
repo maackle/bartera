@@ -1,0 +1,9 @@
+/* line 3, ../../app/assets/sass/mixins.scss */
+.center {
+  text-align: center;
+}
+
+/* line 7, ../../app/assets/sass/mixins.scss */
+.justify {
+  text-align: justify;
+}

@@ -6,6 +6,10 @@
   display: none;
 }
 
+.container {
+  @include container;
+}
+
 .deprecated * {
   opacity: 0.5;
   text-decoration: line-through;
@@ -44,66 +48,6 @@ form {
   dd.error {
     display: inline-block;
   }
-}
-
-.userwords-page {
-
-  .actions {
-    width: 50%;
-    float: right;
-    background: white;
-    border: 3px double #444;
-    margin: 0 0 10px 10px;
-  }
-
-  ul.temp-word-list {
-
-    li {
-      font-size: 0.8em;
-      color: purple;
-      padding: 5px;
-      background: transparentize(purple, 0.82);
-      position: relative;
-      cursor: pointer;
-
-      .definition {
-        display: none;
-        position: absolute;
-        top: 2.7em;
-        left: 0px;
-        width: auto;
-      }
-
-      &:nth-child(odd) {
-        background: transparentize(purple, 0.9);
-      }
-
-      &.learning {
-
-      }
-
-      &.mastered {
-        font-style: italic;
-        background: #ddd;
-        color: #2f4f4f;
-      }
-
-      &:hover {
-        //background: transparentize(black, 0.2);
-        padding: 3px;
-        border: 2px solid transparentize(black, 0.2);
-
-        .definition {
-          display: block;
-          background: transparentize(black, 0.2);
-          padding: 10px;
-          color: white;
-          z-index: 1;
-        }
-      }
-    }
-  }
-
 }
 
 ul {

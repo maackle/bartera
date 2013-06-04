@@ -26,7 +26,7 @@ object User extends MetaModel[User] {
 		table.where(_.username === username).headOption
 	}
 
-	def isAuthenticated(implicit request:Request[AnyContent]) = request.session.get(Security.username).flatMap(User.lookupByName(_))
+	def isAuthenticated(implicit request:Request[_]) = request.session.get(Security.username).flatMap(User.lookupByName(_))
 
 	def authenticate(username: String, password: String):Option[User] = inTransaction {
 		// TODO: use SHA1

@@ -1,7 +1,9 @@
 package models
 
 case class Item(
-	user_id:Long
+	what: String,
+	description: String = "",
+	user_id:Long = 0L
 				 ) extends IdPK {
 
 }

@@ -11,7 +11,7 @@ trait Secured extends Controller with Common {
 		Redirect(routes.Auth.login).flashing(msgError("Please log in"))
 	}
 
-	def IsAuthenticated(f: User => Request[AnyContent] => Result) = {
+	def IsAuthenticated(f: User => Request[_] => Result) = {
 		Security.Authenticated(username, onUnauthorized) { username =>
 			val user = User.getByName(username)
 			Action(request => f(user)(request))
@@ -25,7 +25,7 @@ trait Secured extends Controller with Common {
 //		}
 //	}
 
-	def IsAdmin(f: User => Request[AnyContent] => Result) = IsAuthenticated { user => ctx =>
+	def IsAdmin(f: User => Request[_] => Result) = IsAuthenticated { user => ctx =>
 		if(user.isAdmin)
 			f(user)(ctx)
 		else

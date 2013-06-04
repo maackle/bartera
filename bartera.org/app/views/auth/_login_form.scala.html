@@ -4,7 +4,7 @@
 
     @helper.inputText(form("email"))
     @helper.inputPassword(form("password"))
-    <input type="hidden" name="referrer" value="@request.uri" />
+    <input type="hidden" name="referrer" value="@request.flash.get("referrer").getOrElse("/")" />
 
     @form.globalError.map { error =>
         <p class="error">

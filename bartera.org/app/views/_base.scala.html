@@ -1,4 +1,4 @@
-@(title: String, bodyClass:String="")(content: Html)(implicit request:Request[AnyContent])
+@(title: String, bodyClass:String="")(content: Html)(implicit request:Request[_])
 
 <!DOCTYPE html>
 
@@ -47,6 +47,7 @@
                 <ul class="right">
                     @if(User.isAuthenticated) {
                         <li class="divider show-for-small"></li>
+                        <li><a href="@controllers.user.routes.Haves.index">haves</a></li>
                         <li><a href="@routes.Auth.deauthenticate">log out</a></li>
                     } else {
                         <li><a href="@routes.Auth.login">log in</a></li>
