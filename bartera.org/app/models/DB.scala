@@ -7,9 +7,11 @@ import org.squeryl.PrimitiveTypeMode._
 object DB extends Schema {
 
 	val users = table[models.User]
-	val items = table[models.Item]
+	val haves = table[models.Have]
+	val wants = table[models.Want]
 
-	val userItems = oneToManyRelation(users, items).via((u, i) => u.id === i.user_id)
+	val userHaves = oneToManyRelation(users, haves).via((u, i) => u.id === i.user_id)
+	val userWants = oneToManyRelation(users, wants).via((u, i) => u.id === i.user_id)
 
 //	def q(query: String, args: Any*) = new RawTupleQuery(query, args)
 }

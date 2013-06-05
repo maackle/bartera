@@ -1,0 +1,26 @@
+@(haves:Seq[Have])(implicit request: Request[_])
+
+<div class="have-list">
+    <table>
+        <thead>
+            <tr>
+                <th>what</th>
+                <th>description</th>
+                <th>action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(have <- haves) {
+                <tr>
+                    <td>@have.what</td>
+                    <td>@have.description</td>
+                    <td>
+                        <a href="#">edit</a>
+                        <a href="#">delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -8,9 +8,12 @@ case class User(
 	userprofile_id: Long = 0L
 				 ) extends IdPK {
 
-//	this() = this("", "", 0L)
+	def this() = this("", "", 0L)
 
 	val username = email
+
+	lazy val haves = DB.userHaves.left(this)
+	lazy val wants = DB.userWants.left(this)
 
 	def isAdmin = false
 }

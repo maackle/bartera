@@ -1,18 +1,20 @@
-@(form:Form[_])(implicit request:Request[_])
+@(addHaveForm:Form[_], haves:Seq[Have])(implicit request:Request[_])
 
 @_base("haves") {
 
     <h1>Haves</h1>
 
     @helper.form(controllers.user.routes.Haves.add) {
-        @helper.inputText(form("what"))
-        @helper.textarea(form("description"))
+        @helper.inputText(addHaveForm("what"))
+        @helper.textarea(addHaveForm("description"))
         <input type="submit" />
     }
 
-    @form.globalError.map { error =>
+    @addHaveForm.globalError.map { error =>
         <p class="error">
             @error.message
         </p>
     }
+
+    @views.html.user.haves._list(haves)
 }
