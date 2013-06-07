@@ -1,0 +1,25 @@
+@(addHaveForm:Form[_], haves:Seq[Have])(implicit request:Request[_])
+
+@_base("haves") {
+
+    <h1>Haves</h1>
+
+    @helper.form(controllers.user.routes.Haves.add, 'class -> "upload-form have-add-form", 'enctype -> "multipart/form-data") {
+        @helper.inputText(addHaveForm("what"))
+        @helper.textarea(addHaveForm("description"))
+        <input name="images[]" type="file" multiple />
+        <input type="submit" />
+
+        <div class="gallery">
+
+        </div>
+    }
+
+    @addHaveForm.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }
+
+    @views.html.user.haves._list(haves)
+}

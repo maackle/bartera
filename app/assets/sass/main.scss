@@ -1,0 +1,102 @@
+@import "vars";
+@import "mixins";
+@import "app";
+
+@import "compass/css3/border-radius";
+
+.no-show {
+  display: none;
+}
+
+.container {
+  @include container;
+}
+
+.deprecated * {
+  opacity: 0.5;
+  text-decoration: line-through;
+}
+
+
+.upload-form {
+  .gallery {
+    .preview {
+      border: 5px solid gold;
+      @include border-radius(5px);
+    }
+  }
+}
+
+body {
+  
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+.ajax-post {
+  border: 2px dotted #ff00ff;
+}
+
+.ajax-waiting {
+  background: gray;
+}
+
+.ajax-failed {
+  background: red;
+}
+
+.ajax-toggle-pair {
+
+  .ajax-toggle {
+    display: none;
+  }
+
+  .ajax-toggle-active {
+    display: inherit;
+  }
+}
+
+form {
+  dd.info {
+    font-size: 0.75em;
+    margin-top: -0.75em;
+    float: right;
+    display: inline;
+  }
+  dd.error {
+    display: inline-block;
+  }
+}
+
+ul {
+  list-style: none;
+
+  &.bulleted {
+    list-style: inherit;
+  }
+}
+
+ul.inline {
+
+  list-style: none;
+
+  li {
+    display: inline-block;
+  }
+
+}
+
+table {
+  thead.center {
+    th {
+      text-align: center;
+    }
+  }
+}
+
+nav {
+	color: #999;
+	.name {
+		font-size: 1.2em;
+	}
+}
