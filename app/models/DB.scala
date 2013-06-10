@@ -1,17 +1,30 @@
 package models
 
-import org.squeryl.{PrimitiveTypeMode, KeyedEntity, Table, Schema}
+import org.squeryl._
 import org.squeryl.dsl._
 import org.squeryl.PrimitiveTypeMode._
+import org.squeryl.dsl.CompositeKey2
 
 object DB extends Schema {
 
 	val users = table[models.User]
 	val haves = table[models.Have]
 	val wants = table[models.Want]
+//	val haveImages = table[models.HaveImage]
+//	val wantImages = table[models.WantImage]
+
+	val itemImages = table[models.ItemImage]
 
 	val userHaves = oneToManyRelation(users, haves).via((u, i) => u.id === i.user_id)
 	val userWants = oneToManyRelation(users, wants).via((u, i) => u.id === i.user_id)
+
+	class HaveImage(val have_id:Long, val image_id:Long) extends KeyedEntity[CompositeKey2[Long,Long]] { def id = compositeKey(have_id, image_id) }
+	class WantImage(val want_id:Long, val image_id:Long) extends KeyedEntity[CompositeKey2[Long,Long]] { def id = compositeKey(want_id, image_id) }
+
+//	val haveHaveImages = oneToManyRelation(haves, haveImages).via((h, i) => h.id === i.have_id)
+//	val wantWantImages = oneToManyRelation(wants, wantImages).via((w, i) => w.id === i.want_id)
+	val haveImages = manyToManyRelation(haves, itemImages).via[HaveImage]((h, i, hi) => (h.id === hi.have_id, hi.image_id === i.id))
+	val wantImages = manyToManyRelation(wants, itemImages).via[WantImage]((w, i, wi) => (w.id === wi.want_id, wi.image_id === i.id))
 
 //	def q(query: String, args: Any*) = new RawTupleQuery(query, args)
 }

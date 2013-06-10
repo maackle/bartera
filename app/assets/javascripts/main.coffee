@@ -3,45 +3,79 @@ $ ->
 
   class UploadForm
 
-    lastIndex: 0
-
-    constructor: (@$container) ->
+    constructor: (@$container, @have_id) ->
       @$gallery = @$container.find('.gallery')
+      @$fileinput = -> this.$container.find('input[type=file]')
 
     initialize: ->
-      fu = this.$container.find('input[type=file]').fileupload
-        url: "/haves/saveImage"
+      fu = @$fileinput().fileupload
+        url: "/haves/#{@have_id}/saveImage"
         dataType: "json"
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
         disableImageResize: false
         previewMaxWidth: 100
         previewMaxHeight: 100
         previewCrop: true
+        dropZone: @$container.find('.dropzone')
 
-      fu.on 'fileuploadadd', (e, data) =>
-        for file, index in data.files
-          this.$gallery.append """
-                               <div class="preview unprocessed" data-index=#{index}>
-                               </div>
-                               """
+#      fu.on 'fileuploadadd', (e, data) =>
+#        for file in data.files
+#          console.dir file
+#          this.$gallery.append """
+#                               <div class="preview unprocessed" data-index=#{index}>
+#                               </div>
+#                               """
 
       fu.on 'fileuploadprocessalways', (e, data) =>
         console.log 'processalways', data
         for file, index in data.files
-          $div = this.$gallery.find(".unprocessed[data-index=#{index}]")
-          $div.removeClass('unprocessed')
+          $preview = $("""
+                     <div class="preview">
+                     </div>
+                     """)
+          this.$gallery.append $preview
 
           if file.preview
-            $div.append(file.preview)
+            $preview.append(file.preview)
 
+      $('.preview.adder').click (e) =>
+        @$fileinput().trigger 'click'
 
+      $(document).bind 'drop dragover', (e) ->
+        e.preventDefault()
 
+  for form in $('.have-edit-form')
+    console.log form
+    addHaveForm = new UploadForm($(form), $(form).attr('data-object-id'))
+    addHaveForm.initialize()
 
+  $(document).bind 'dragover', (e) ->
+    dropZone = $('.dropzone')
+    timeout = window.dropZoneTimeout;
+    if (!timeout)
+      dropZone.addClass('in')
+    else
+      clearTimeout(timeout)
 
-  addHaveForm = new UploadForm($('.have-add-form'))
-  addHaveForm.initialize()
+    found = false
+    node = e.target
+    foo = ->
+      if (node == dropZone[0])
+        found = true
+      node = node.parentNode
 
+    foo()
+    foo() while node is not null
 
+    if (found)
+      dropZone.addClass('hover')
+    else
+      dropZone.removeClass('hover')
+
+    window.dropZoneTimeout = setTimeout ->
+      window.dropZoneTimeout = null
+      dropZone.removeClass('in hover')
+    , 150
 
 
 

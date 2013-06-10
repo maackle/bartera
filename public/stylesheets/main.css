@@ -6664,12 +6664,12 @@ a.th {
   max-width: 800px;
 }
 
-/* line 7, ../../app/assets/sass/main.scss */
+/* line 8, ../../app/assets/sass/main.scss */
 .no-show {
   display: none;
 }
 
-/* line 11, ../../app/assets/sass/main.scss */
+/* line 12, ../../app/assets/sass/main.scss */
 .container {
   *zoom: 1;
   max-width: 55.04em;
@@ -6686,86 +6686,129 @@ a.th {
   clear: both;
 }
 
-/* line 15, ../../app/assets/sass/main.scss */
+/* line 16, ../../app/assets/sass/main.scss */
 .deprecated * {
   opacity: 0.5;
   text-decoration: line-through;
 }
 
-/* line 23, ../../app/assets/sass/main.scss */
+/* line 21, ../../app/assets/sass/main.scss */
+.dropzone {
+  -webkit-transition: all 500ms;
+  -moz-transition: all 500ms;
+  -o-transition: all 500ms;
+  transition: all 500ms;
+  background: white;
+}
+/* line 25, ../../app/assets/sass/main.scss */
+.dropzone.in {
+  border: 4px solid red;
+}
+/* line 29, ../../app/assets/sass/main.scss */
+.dropzone.hover {
+  background: blue;
+}
+
+/* line 37, ../../app/assets/sass/main.scss */
 .upload-form .gallery .preview {
-  border: 5px solid gold;
+  width: 100px;
+  height: 100px;
+  display: inline-block;
+  vertical-align: top;
+  margin: 10px;
+  border: 1px solid #333;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
 }
+/* line 46, ../../app/assets/sass/main.scss */
+.upload-form .gallery .preview.adder {
+  cursor: pointer;
+  background: darkseagreen;
+  padding: 0;
+  font-size: 80px;
+  text-align: center;
+  line-height: 100px;
+}
+/* line 55, ../../app/assets/sass/main.scss */
+.upload-form .gallery .preview.adder:hover {
+  background: #b5d3b5;
+}
+/* line 59, ../../app/assets/sass/main.scss */
+.upload-form .gallery .preview.adder:active {
+  background: #5f9f5f;
+}
+/* line 66, ../../app/assets/sass/main.scss */
+.upload-form input.file-add-input {
+  display: none;
+}
 
-/* line 36, ../../app/assets/sass/main.scss */
+/* line 82, ../../app/assets/sass/main.scss */
 .ajax-post {
   border: 2px dotted #ff00ff;
 }
 
-/* line 40, ../../app/assets/sass/main.scss */
+/* line 86, ../../app/assets/sass/main.scss */
 .ajax-waiting {
   background: gray;
 }
 
-/* line 44, ../../app/assets/sass/main.scss */
+/* line 90, ../../app/assets/sass/main.scss */
 .ajax-failed {
   background: red;
 }
 
-/* line 50, ../../app/assets/sass/main.scss */
+/* line 96, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle {
   display: none;
 }
-/* line 54, ../../app/assets/sass/main.scss */
+/* line 100, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle-active {
   display: inherit;
 }
 
-/* line 60, ../../app/assets/sass/main.scss */
+/* line 106, ../../app/assets/sass/main.scss */
 form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
   display: inline;
 }
-/* line 66, ../../app/assets/sass/main.scss */
+/* line 112, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 71, ../../app/assets/sass/main.scss */
+/* line 117, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 74, ../../app/assets/sass/main.scss */
+/* line 120, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 79, ../../app/assets/sass/main.scss */
+/* line 125, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 83, ../../app/assets/sass/main.scss */
+/* line 129, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 91, ../../app/assets/sass/main.scss */
+/* line 137, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 97, ../../app/assets/sass/main.scss */
+/* line 143, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 99, ../../app/assets/sass/main.scss */
+/* line 145, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }

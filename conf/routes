@@ -11,11 +11,15 @@ GET     /logout                     controllers.Auth.deauthenticate
 GET     /signup                     controllers.Auth.signup
 POST    /signup                     controllers.Auth.register
 
+GET     /image/:id                  controllers.Application.viewImage(id:Long)
+
 GET     /dev/schema/rebuild         controllers.dev.Schema.rebuild
 
 GET     /haves                      controllers.user.Haves.index
 POST    /haves                      controllers.user.Haves.add
-POST    /haves/saveImage            controllers.user.Haves.handleImages
+GET     /haves/:id                  controllers.user.Haves.edit(id:Long)
+POST    /haves/:id                  controllers.user.Haves.update(id:Long)
+POST    /haves/:id/saveImage            controllers.user.Haves.handleImages(id:Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

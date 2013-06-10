@@ -1,0 +1,5 @@
+@(form:Form[_], have:Have)(implicit request:Request[_])
+
+@_base("Edit") {
+    @views.html.user.haves._edit_form(form, have)
+}

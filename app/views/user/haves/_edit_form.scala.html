@@ -1,0 +1,22 @@
+@(form:Form[_], have:Have)(implicit request: Request[_])
+
+    @helper.form(controllers.user.routes.Haves.update(have.id), 'class -> "upload-form have-edit-form", 'enctype -> "multipart/form-data", Symbol("data-object-id") -> have.id.toString) {
+        @helper.inputText(form("what"))
+        @helper.textarea(form("description"))
+
+        <div class="gallery dropzone">
+            <div class="preview adder">
+                +
+            </div>
+        </div>
+
+        <input name="images[]" type="file" class="file-add-input" multiple />
+        <input type="submit" />
+
+    }
+
+    @form.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }
