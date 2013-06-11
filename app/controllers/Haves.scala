@@ -1,14 +1,9 @@
-package controllers.user
+package controllers
 
-import controllers.{Secured}
 import play.api.data.Form
 import play.api.data.Forms._
 import models.{ItemImage, User, Have}
-import views.html.helper.form
-import java.io.{ByteArrayInputStream, FileInputStream}
-import play.api.mvc.Action
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
+
 
 object Haves extends Secured {
 
@@ -37,8 +32,13 @@ object Haves extends Secured {
 	}
 
 	def edit(have_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		val have = transaction { Have.table.get(have_id) }
-		Ok(views.html.user.haves.edit(Forms.editHave, have))
+		transaction (Have.table.lookup(have_id)).map { have =>
+			Ok(views.html.user.haves.edit(Forms.editHave.fill(have), have))
+		}
+		.getOrElse {
+			Redirect(routes.Haves.index)
+		}
+
 	}
 
 	def update(have_id:Long) = IsAuthenticated { implicit user => implicit request =>
@@ -48,7 +48,7 @@ object Haves extends Secured {
 			have => transaction {
 				have.id = have_id
 				Have.table.update(have)
-				Ok("updated")
+				Redirect(routes.Haves.index)
 			}
 		)
 	}

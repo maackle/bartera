@@ -28,6 +28,8 @@ trait Common
 		)
 	}
 
+	def app = play.api.Play.current
+
 	//  implicit def injectContext(request:Request[AnyContent]) = Context(request)
 	//  implicit def deriveRequest(ctx:Context[AnyContent]) = ctx.request
 }

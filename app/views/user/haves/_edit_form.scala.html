@@ -1,10 +1,15 @@
 @(form:Form[_], have:Have)(implicit request: Request[_])
 
-    @helper.form(controllers.user.routes.Haves.update(have.id), 'class -> "upload-form have-edit-form", 'enctype -> "multipart/form-data", Symbol("data-object-id") -> have.id.toString) {
+    @helper.form(controllers.routes.Haves.update(have.id), 'class -> "upload-form have-edit-form", 'enctype -> "multipart/form-data", Symbol("data-object-id") -> have.id.toString) {
         @helper.inputText(form("what"))
         @helper.textarea(form("description"))
 
         <div class="gallery dropzone">
+            @for(url <- have.thumbURLs) {
+                <div class="preview">
+                    <img src="@url" />
+                </div>
+            }
             <div class="preview adder">
                 +
             </div>

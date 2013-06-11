@@ -1,6 +1,6 @@
 @(addHaveForm:Form[_])(implicit request: Request[_])
 
-    @helper.form(controllers.user.routes.Haves.add, 'enctype -> "multipart/form-data") {
+    @helper.form(routes.Haves.add, 'enctype -> "multipart/form-data") {
         @helper.inputText(addHaveForm("what"))
         @helper.textarea(addHaveForm("description"))
     }

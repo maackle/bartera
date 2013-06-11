@@ -12,13 +12,11 @@ object Application extends Common {
 		Ok(views.html.index("Your new application is ready."))
 	}
 
-
-	def viewImage(image_id:Long) = Action {
+	def viewImage(image_id:Long, size:Int) = Action {
 		val image = transaction { ItemImage.table.get(image_id) }
-		val r = Ok(image.image)
-		r.withHeaders(
-			"Content-type" -> image.contentType
+		val (bytes, contentType) = image.serve(size)
+		Ok(bytes).withHeaders(
+			"Content-type" -> contentType
 		)
 	}
-  
 }

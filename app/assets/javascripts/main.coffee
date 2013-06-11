@@ -49,34 +49,34 @@ $ ->
     addHaveForm = new UploadForm($(form), $(form).attr('data-object-id'))
     addHaveForm.initialize()
 
-  $(document).bind 'dragover', (e) ->
-    dropZone = $('.dropzone')
-    timeout = window.dropZoneTimeout;
-    if (!timeout)
-      dropZone.addClass('in')
-    else
-      clearTimeout(timeout)
-
-    found = false
-    node = e.target
-    foo = ->
-      if (node == dropZone[0])
-        found = true
-      node = node.parentNode
-
-    foo()
-    foo() while node is not null
-
-    if (found)
-      dropZone.addClass('hover')
-    else
-      dropZone.removeClass('hover')
-
-    window.dropZoneTimeout = setTimeout ->
-      window.dropZoneTimeout = null
-      dropZone.removeClass('in hover')
-    , 150
-
+#  $(document).bind 'dragover', (e) ->
+#    dropZone = $('.dropzone')
+#    timeout = window.dropZoneTimeout;
+#    if (!timeout)
+#      dropZone.addClass('in')
+#    else
+#      clearTimeout(timeout)
+#
+#    found = false
+#    node = e.target
+#    foo = ->
+#      if (node == dropZone[0])
+#        found = true
+#      node = node.parentNode
+#
+#    foo()
+#    foo() while node is not null
+#
+#    if (found)
+#      dropZone.addClass('hover')
+#    else
+#      dropZone.removeClass('hover')
+#
+#    window.dropZoneTimeout = setTimeout ->
+#      window.dropZoneTimeout = null
+#      dropZone.removeClass('in hover')
+#    , 150
+#
 
 
 ##################################################################################################

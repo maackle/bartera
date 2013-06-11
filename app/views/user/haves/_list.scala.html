@@ -4,18 +4,22 @@
     <table>
         <thead>
             <tr>
+                <th>image</th>
                 <th>what</th>
                 <th>description</th>
                 <th>action</th>
             </tr>
         </thead>
         <tbody>
-            @for(have <- haves) {
+            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse("")) {
                 <tr>
+                    <td>
+                        <img src="@thumbURL" />
+                    </td>
                     <td>@have.what</td>
                     <td>@have.description</td>
                     <td>
-                        <a href="@controllers.user.routes.Haves.edit(have.id)">edit</a>
+                        <a href="@routes.Haves.edit(have.id)">edit</a>
                         <a href="#">delete</a>
                     </td>
                 </tr>
