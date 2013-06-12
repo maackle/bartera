@@ -9,7 +9,7 @@ $ ->
 
     initialize: ->
       fu = @$fileinput().fileupload
-        url: "/haves/#{@have_id}/saveImage"
+        url: "/haves/#{@have_id}/image"
         dataType: "json"
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
         disableImageResize: false
@@ -27,7 +27,6 @@ $ ->
 #                               """
 
       fu.on 'fileuploadprocessalways', (e, data) =>
-        console.log 'processalways', data
         for file, index in data.files
           $preview = $("""
                      <div class="preview">
@@ -37,6 +36,9 @@ $ ->
 
           if file.preview
             $preview.append(file.preview)
+
+      fu.on 'fileuploaddone', (e, data) =>
+        console.log data
 
       $('.preview.adder').click (e) =>
         @$fileinput().trigger 'click'

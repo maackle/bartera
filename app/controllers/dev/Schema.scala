@@ -1,6 +1,6 @@
 package controllers.dev
 
-import controllers.Common
+import app.Common
 import play.api.mvc.{Action, Controller}
 import models.{User, DB}
 

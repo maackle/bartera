@@ -3,6 +3,7 @@ package controllers
 import play.api.data.Form
 import play.api.data.Forms._
 import models.{ItemImage, User, Have}
+import play.api.libs.json.Json
 
 
 object Haves extends Secured {
@@ -63,8 +64,8 @@ object Haves extends Secured {
 		)
 	}
 
-	def handleImages(have_id:Long) = IsAuthenticated(parse.multipartFormData) { implicit user => implicit request =>
-		transaction {
+	def addImage(have_id:Long) = IsAuthenticated(parse.multipartFormData) { implicit user => implicit request =>
+		val images = transaction {
 //			val have_id = request.body.dataParts.get("have_id").map(_.head).get.toLong
 
 			val have = Have.table.get(have_id)
@@ -74,11 +75,17 @@ object Haves extends Secured {
 				val im = ItemImage.create(f.ref.file, f.contentType.get)
 				ItemImage.table.insert(im)
 				have.images.associate(im)
-
+				im
 			}
 		}
 
-		Ok("got image?")
+		require(images.length == 1, "there should only be one image uploaded at a time")
+
+		Success(Json.toJson(Map("image" -> images.head.id))).toResult
+	}
+
+	def deleteImage(have_id:Long, image_id:Long) = IsAuthenticated { implicit user => implicit request =>
+		Success().toResult
 	}
 
 	object Forms {

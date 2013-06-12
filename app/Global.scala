@@ -1,13 +1,15 @@
 
+import grizzled.slf4j.Logging
 import org.squeryl.internals.DatabaseAdapter
 import org.squeryl.{Session, SessionFactory}
 import org.squeryl.adapters.{H2Adapter, PostgreSqlAdapter}
 import play.api.db.DB
 import play.api.{GlobalSettings, Play, Application}
 
-object Global extends GlobalSettings {
+object Global extends GlobalSettings with Logging {
 
 	override def onStart(app: Application) {
+		info("DB driver: " + app.configuration.getString("db.default.driver"))
 		SessionFactory.concreteFactory = app.configuration.getString("db.default.driver") match {
 			case Some("org.h2.Driver") => Some(() => getSession(new H2Adapter, app))
 			case Some("org.postgresql.Driver") => Some(() => getSession(new PostgreSqlAdapter, app))

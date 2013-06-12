@@ -3,10 +3,10 @@ package models
 import play.api.mvc.{AnyContent, Request, Security}
 
 case class User(
-	email: String,
-	passhash: String,
-	userprofile_id: Long = 0L
-				 ) extends IdPK {
+						email: String,
+						passhash: String,
+						userprofile_id: Long = 0L
+						) extends IdPK {
 
 	def this() = this("", "", 0L)
 

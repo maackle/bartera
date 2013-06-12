@@ -1,16 +1,19 @@
 @(haves:Seq[Have])(implicit request: Request[_])
 
 <div class="have-list">
-    <table>
-        <thead>
-            <tr>
-                <th>image</th>
-                <th>what</th>
-                <th>description</th>
-                <th>action</th>
-            </tr>
-        </thead>
-        <tbody>
+    @if(haves.isEmpty) {
+        <i>You have no haves!  Start adding.</i>
+    } else {
+        <table>
+            <thead>
+                <tr>
+                    <th>image</th>
+                    <th>what</th>
+                    <th>description</th>
+                    <th>action</th>
+                </tr>
+            </thead>
+            <tbody>
             @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse("")) {
                 <tr>
                     <td>
@@ -24,7 +27,8 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
 
 </div>
