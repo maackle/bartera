@@ -4,7 +4,10 @@
 
     <h1>Haves</h1>
 
-    @views.html.user.haves._add_form(addHaveForm)
+    <div class="panel">
+        <h3>Add a Have</h3>
+        @views.html.user.haves._add_form(addHaveForm)
+    </div>
 
     @views.html.user.haves._list(haves)
 }

@@ -10,8 +10,12 @@ object Schema extends Controller with Common {
 		transaction {
 			DB.drop
 			DB.create
-			User.register(User("michael@lv11.co", "q1w2e3"))
+			seed()
 		}
 		Ok("schema rebuilt")
+	}
+
+	def seed() = inTransaction {
+		User.register(User("michael@lv11.co", "q1w2e3"))
 	}
 }

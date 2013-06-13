@@ -7,6 +7,7 @@ import java.awt.{RenderingHints, Rectangle}
 
 import play.api._
 import play.api.mvc._
+import play.api.Play._
 
 trait DBImage extends IdPK {
 	def master:Array[Byte]
@@ -89,6 +90,8 @@ object ImageOps {
 case class ItemImage(val master:Array[Byte], val clipRect:Rectangle, val contentType:String) extends DBImage {
 
 	lazy val image = ImageIO.read(new ByteArrayInputStream(master))
+
+	lazy val thumbURL = (controllers.routes.Application.viewImage(id, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size"))))
 
 	def serve(size:Int) = {
 		val resized = image.cropAspect(1.0).resizeProportionally(size, size)

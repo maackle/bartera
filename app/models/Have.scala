@@ -17,6 +17,8 @@ case class Have(
 
 	lazy val images = DB.haveImages.left(this)
 
+	def imageObjects = transaction { images.toArray }
+
 	lazy val thumbURLs = transaction { images.map(_.id).map(controllers.routes.Application.viewImage(_, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size")))) }
 
 }

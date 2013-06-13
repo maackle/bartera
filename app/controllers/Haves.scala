@@ -85,7 +85,18 @@ object Haves extends Secured {
 	}
 
 	def deleteImage(have_id:Long, image_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		Success().toResult
+		val success = transaction {
+			val have = Have.table.get(have_id)
+			val image = ItemImage.table.get(image_id)
+			have.images.dissociate(image)
+
+		}
+		if(success) {
+			Success().toResult
+		}
+		else {
+			Error("couldn't delete image").toResult
+		}
 	}
 
 	object Forms {

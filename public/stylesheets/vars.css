@@ -1,0 +1,204 @@
+/* Foundation Variables */
+/* The default font-size is set to 100% of the browser style sheet (usually 16px) */
+/* for compatibility with browser-based text zoom or user-set defaults. */
+/* This is the default html and body font-size for the base em value. */
+/* Since the typical default browser font-size is 16px, that makes the calculation for grid size. */
+/* If you want your base font-size to be a different size and not have it effect grid size too, */
+/* set the value of $em-base to $base-font-size ($em-base: $base-font-size;) */
+/* Working in ems is annoying. Think in pixels by using this handy function, emCalc(#px) */
+/* Change whether or not you include browser prefixes */
+/* Various global styles */
+/* Font-smoothing */
+/* Text direction settings */
+/* Colors */
+/* Make sure border radius matches unless we want it different. */
+/* Inset shadow shiny edges and depressions. */
+/* Control whether or not CSS classes come through in the CSS files. */
+/* Media Queries */
+/* Cursors */
+/* Custom use example -> $cursor-default-value: url(http://cursors-site.net/path/to/custom/cursor/default.cur),progress; */
+/* Grid Variables */
+/* Block Grid Variables */
+/* Maximum number of block grid elements per row */
+/* Enables media queries for block-grid classes. Set to false if writing semantic HTML. */
+/* Typography Variables */
+/* Heading font styles */
+/* Heading font sizes */
+/* Subheaders */
+/* <small> styling */
+/* Paragraphs */
+/* <code> tags */
+/* Anchors */
+/* <hr> element */
+/* Lists */
+/* Blockquotes */
+/* Acronym */
+/* Padding and margin */
+/* Border styles */
+/* Full name font styles */
+/* Summary font styles */
+/* <abbr> padding */
+/* <abbr> font styles */
+/* Form Variables */
+/* Base for lots of form spacing and positioning styles */
+/* Labels */
+/* Fieldset border and spacing. */
+/* Legends */
+/* Prefix and postfix input elements */
+/* Error states for inputs and labels */
+/* Glowing effect of inputs when focused */
+/* Button Variables */
+/* Padding for buttons. */
+/* Display property. */
+/* Button text styles. */
+/* Various hover effects. */
+/* Button border styles. */
+/* Radius used throughout the core. */
+/* Opacity for disabled buttons. */
+/* Button Groups */
+/* Sets the margin for the right side by default, and the left margin if right-to-left direction is used */
+/* Dropdown Button Variables */
+/* Color of the pip in dropdown buttons */
+/* Tiny dropdown buttons */
+/* Small dropdown buttons */
+/* Medium dropdown buttons */
+/* Large dropdown buttons */
+/* Split Button Variables */
+/* Shared styles for Split Buttons */
+/* Tiny split buttons */
+/* Small split buttons */
+/* Medium split buttons */
+/* Large split buttons */
+/* Alert Variables */
+/* Alert padding */
+/* Text style */
+/* Hover effect */
+/* Border Styles */
+/* Close Button style */
+/* Border radius */
+/* Breadcrumb Variables */
+/* Background color for the breadcrumb container. */
+/* Padding around the breadcrumbs. */
+/* Border styles. */
+/* Various text styles for breadcrumbs. */
+/* Slash between breadcrumbs */
+/* Clearing Variables */
+/* Background colors for parts of Clearing. */
+/* Close button */
+/* Style the arrows */
+/* Style captions */
+/* Make the image and carousel height and style */
+/* Custom Form Variables */
+/* Basic form styles input styles */
+/* Custom select form element. */
+/* Custom select dropdown element. */
+/* Dropdown Variables */
+/* Height and width styles. */
+/* Background color */
+/* Border styles for dropdowns. */
+/* Triangle pip. */
+/* List elements. */
+/* When the dropdown has custom content. */
+/* Flex Video Variables */
+/* Video container padding and margins */
+/* Widescreen bottom padding */
+/* Inline List Variables */
+/* Margins and padding of the inline list. */
+/* Overflow of the inline list. */
+/* List items */
+/* Elments within list items */
+/* Joyride Variables */
+/* Joyride styles */
+/* Tip font styles */
+/* Changes the nub size */
+/* Adjusts the styles for the timer when its enabled */
+/* Changes up the styles for the close button */
+/* When Joyride is filling the screen, style for the bg */
+/* Keystroke Variables */
+/* Text styles. */
+/* Keystroke padding. */
+/* Background and border styles. */
+/* Label Variables */
+/* Style the labels */
+/* We use these to style the label text */
+/* Magellan Variables */
+/* Basic visual styles */
+/* Orbit Settings */
+/* Caption styles */
+/* Left/right nav styles */
+/* Timer styles */
+/* Bullet nav styles */
+/* Slide numbers */
+/* Graceful Loading Wrapper and preloader */
+/* Pagination Variables */
+/* Pagination container */
+/* List-item properties */
+/* Pagination anchor links */
+/* Disabled anchor links */
+/* Currently selected anchor links */
+/* Panel Variables */
+/* Background and border styles */
+/* Control how much we darken things on hover */
+/* Inner padding and bottom margin */
+/* Font colors */
+/* Set to false to keep default header styles */
+/* Pricing Table Variables */
+/* Border color */
+/* Bottom margin of the pricing table */
+/* Control the title styles */
+/* Control the price styles */
+/* Description styles */
+/* List item styles */
+/* CTA area styles */
+/* Progress Bar Variables */
+/* Progress bar height */
+/* Border styles */
+/* Margin & padding */
+/* Meter colors */
+/* Reveal Variables */
+/* Reveal overlay. */
+/* Modal itself. */
+/* Reveal close button */
+/* Modal border */
+/* Section Variables */
+/* Padding and hover factor */
+/* Titles */
+/* Border size */
+/* Font controls */
+/* Control the color of the background and some size options */
+/* Side Nav Variables */
+/* Padding */
+/* List styles */
+/* Link styles */
+/* Border styles */
+/* Sub Nav Variables */
+/* Margin and padding */
+/* Definition */
+/* Active item styles */
+/* Switch Variables */
+/* Border styles and background colors for the switch container */
+/* Switch heights for our default classes */
+/* Font sizes for our classes. */
+/* Switch-paddle */
+/* Outline Style for tabbing through switches */
+/* Table Variables */
+/* Background color for the table and even rows */
+/* Table cell border style */
+/* Table head styles */
+/* Row padding and font styles */
+/* Display and margin of tables */
+/* Image Thumbnail Variables */
+/* Border styles */
+/* Radius and transition speed for thumbs */
+/* Tooltip Variables */
+/* Top Bar Variables */
+/* Background color for the top bar */
+/* Height and margin */
+/* Control Input height for top bar */
+/* Controlling the styles for the title in the top bar */
+/* Style the top bar dropdown elements */
+/* Set the link colors and styles for top-level nav */
+/* Top menu icon styles */
+/* Transitions and breakpoint styles */
+/* Divider Styles */
+/* Sticky Class */
