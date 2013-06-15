@@ -34,15 +34,15 @@ object Populator extends Common {
 	}
 
 	private def randomDescription = {
-		val rs = WS.url("http://www.jameydeorio.com/randsense/generate/").get().map { response =>
-			(response.json \ "sentence").as[String]
-		}
-		val sentence = try {
-			Await.result(rs, 100 milliseconds) + "  "
-		} catch {
-			case e:TimeoutException => ""
-		}
-		sentence + lorem.getWords(100, (math.random * 50).toInt)
+//		val rs = WS.url("http://www.jameydeorio.com/randsense/generate/").get().map { response =>
+//			(response.json \ "sentence").as[String]
+//		}
+//		lazy val sentence = try {
+//			Await.result(rs, 100 milliseconds) + "  "
+//		} catch {
+//			case e:TimeoutException => ""
+//		}
+		lorem.getWords(100, (math.random * 50).toInt)
 	}
 
 

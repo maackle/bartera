@@ -17,7 +17,7 @@ trait Common
 	def app = play.api.Play.current
 
 	def noImageURL(size:Int) = {
-		val num = 10
+		val num = 6
 		val brights = for(i <- 0 until num) yield "%x".format(Color.getHSBColor(i.toFloat / num, 1f, 1f).getRGB)
 		val bgColor = "cccccc"
 		val fgColor = brights((math.random*num).toInt)
