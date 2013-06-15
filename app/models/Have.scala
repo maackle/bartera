@@ -10,8 +10,8 @@ import play.api.Play.current
 
 case class Have(
 						what: String,
-						description: String = "",
-						user_id:Long = 0L
+						description: String,
+						user_id:Long
 						) extends ItemBase {
 	def this() = this("", "", 0L)
 

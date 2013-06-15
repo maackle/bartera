@@ -31,6 +31,10 @@
   }
 }
 
+.rounded {
+  @include border-radius(6px);
+}
+
 .button {
   cursor: pointer;
 }
@@ -99,10 +103,60 @@
   }
 }
 
+.have-list {
+  table {
+    $thumb-size: 50px;
+    width: 100%;
+
+    tr {
+      position: relative;
+
+      th {
+        &.image {
+          width: $thumb-size + 20px;
+        }
+      }
+
+      td {
+
+        &.image {
+          width: $thumb-size;
+          img.thumb {
+            width: $thumb-size;
+            height: $thumb-size;
+          }
+        }
+
+      }
+
+      .actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+
+        a {
+          visibility: hidden;
+          margin: auto 5px;
+        }
+      }
+
+      &:hover {
+        .actions {
+          a {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+}
+
 body {
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 .ajax-post {

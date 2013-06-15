@@ -7,24 +7,19 @@
         <table>
             <thead>
                 <tr>
-                    <th>image</th>
-                    <th>what</th>
-                    <th>description</th>
-                    <th>action</th>
+                    <th class="image"></th>
+                    <th class="what">what</th>
+                    <th class="description">description</th>
                 </tr>
             </thead>
             <tbody>
-            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse("")) {
+            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse(app.Common.noImageURL(50))) {
                 <tr>
-                    <td>
-                        <img src="@thumbURL" />
+                    <td class="image">
+                        <img class="thumb" src="@thumbURL" />
                     </td>
-                    <td>@have.what</td>
+                    <td><a href="@routes.Haves.edit(have.id)">@have.what</a></td>
                     <td>@have.description</td>
-                    <td>
-                        <a href="@routes.Haves.edit(have.id)">edit</a>
-                        <a href="#">delete</a>
-                    </td>
                 </tr>
             }
             </tbody>

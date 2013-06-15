@@ -6914,35 +6914,44 @@ a.th {
 }
 
 /* line 34, ../../app/assets/sass/main.scss */
+.rounded {
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+  border-radius: 6px;
+}
+
+/* line 38, ../../app/assets/sass/main.scss */
 .button {
   cursor: pointer;
 }
 
-/* line 38, ../../app/assets/sass/main.scss */
+/* line 42, ../../app/assets/sass/main.scss */
 .align-left {
   text-align: left;
 }
 
-/* line 39, ../../app/assets/sass/main.scss */
+/* line 43, ../../app/assets/sass/main.scss */
 .align-center {
   text-align: center;
 }
 
-/* line 40, ../../app/assets/sass/main.scss */
+/* line 44, ../../app/assets/sass/main.scss */
 .align-right {
   text-align: right;
 }
 
-/* line 42, ../../app/assets/sass/main.scss */
+/* line 46, ../../app/assets/sass/main.scss */
 .empty-notice {
   font-style: italic;
 }
 
-/* line 47, ../../app/assets/sass/main.scss */
+/* line 51, ../../app/assets/sass/main.scss */
 .upload-form .gallery {
   margin: 15px auto;
 }
-/* line 50, ../../app/assets/sass/main.scss */
+/* line 54, ../../app/assets/sass/main.scss */
 .upload-form .gallery .thumb {
   position: relative;
   width: 100px;
@@ -6957,7 +6966,7 @@ a.th {
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-/* line 60, ../../app/assets/sass/main.scss */
+/* line 64, ../../app/assets/sass/main.scss */
 .upload-form .gallery .thumb .controls .delete {
   color: #c60f13;
   font-size: 32px;
@@ -6979,79 +6988,117 @@ a.th {
   -o-border-radius: 16px;
   border-radius: 16px;
 }
-/* line 80, ../../app/assets/sass/main.scss */
+/* line 84, ../../app/assets/sass/main.scss */
 .upload-form .gallery .thumb:hover .controls {
   display: block;
 }
-/* line 92, ../../app/assets/sass/main.scss */
+/* line 96, ../../app/assets/sass/main.scss */
 .upload-form input.file-add-input {
   display: none;
 }
 
-/* line 108, ../../app/assets/sass/main.scss */
+/* line 107, ../../app/assets/sass/main.scss */
+.have-list table {
+  width: 100%;
+}
+/* line 111, ../../app/assets/sass/main.scss */
+.have-list table tr {
+  position: relative;
+}
+/* line 115, ../../app/assets/sass/main.scss */
+.have-list table tr th.image {
+  width: 70px;
+}
+/* line 122, ../../app/assets/sass/main.scss */
+.have-list table tr td.image {
+  width: 50px;
+}
+/* line 124, ../../app/assets/sass/main.scss */
+.have-list table tr td.image img.thumb {
+  width: 50px;
+  height: 50px;
+}
+/* line 132, ../../app/assets/sass/main.scss */
+.have-list table tr .actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+}
+/* line 138, ../../app/assets/sass/main.scss */
+.have-list table tr .actions a {
+  visibility: hidden;
+  margin: auto 5px;
+}
+/* line 146, ../../app/assets/sass/main.scss */
+.have-list table tr:hover .actions a {
+  visibility: visible;
+}
+
+/* line 162, ../../app/assets/sass/main.scss */
 .ajax-post {
   border: 2px dotted #ff00ff;
 }
 
-/* line 112, ../../app/assets/sass/main.scss */
+/* line 166, ../../app/assets/sass/main.scss */
 .ajax-waiting {
   background: gray;
 }
 
-/* line 116, ../../app/assets/sass/main.scss */
+/* line 170, ../../app/assets/sass/main.scss */
 .ajax-failed {
   background: red;
 }
 
-/* line 122, ../../app/assets/sass/main.scss */
+/* line 176, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle {
   display: none;
 }
-/* line 126, ../../app/assets/sass/main.scss */
+/* line 180, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle-active {
   display: inherit;
 }
 
-/* line 132, ../../app/assets/sass/main.scss */
+/* line 186, ../../app/assets/sass/main.scss */
 form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
   display: inline;
 }
-/* line 138, ../../app/assets/sass/main.scss */
+/* line 192, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 143, ../../app/assets/sass/main.scss */
+/* line 197, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 146, ../../app/assets/sass/main.scss */
+/* line 200, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 151, ../../app/assets/sass/main.scss */
+/* line 205, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 155, ../../app/assets/sass/main.scss */
+/* line 209, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 163, ../../app/assets/sass/main.scss */
+/* line 217, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 169, ../../app/assets/sass/main.scss */
+/* line 223, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 171, ../../app/assets/sass/main.scss */
+/* line 225, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }

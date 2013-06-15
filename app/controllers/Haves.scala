@@ -81,7 +81,7 @@ object Haves extends Secured {
 
 		require(images.length == 1, "there should only be one image uploaded at a time")
 
-		Success(Json.toJson(Map("image" -> images.head.id))).toResult
+		AjaxSuccess(Json.toJson(Map("image" -> images.head.id))).toResult
 	}
 
 	def deleteImage(have_id:Long, image_id:Long) = IsAuthenticated { implicit user => implicit request =>
@@ -92,10 +92,10 @@ object Haves extends Secured {
 
 		}
 		if(success) {
-			Success().toResult
+			AjaxSuccess().toResult
 		}
 		else {
-			Error("couldn't delete image").toResult
+			AjaxError("couldn't delete image").toResult
 		}
 	}
 

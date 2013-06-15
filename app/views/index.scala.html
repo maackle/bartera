@@ -1,6 +1,20 @@
 @(message: String)(implicit request:Request[_])
 
 @_base("home") {
+    <div class="align-center">
+        <img src="/assets/images/logo.png" style="margin: 30px auto 60px;"/>
 
-    home page
+        @helper.form(routes.Application.index) {
+            <h2>What are you looking for? <sup>&reg;&trade;$</sup></h2>
+            <input type="text" class="search big-search" />
+            <input type="submit" class="button" value="Search" />
+        }
+
+        <img src="http://lorempixel.com/800/400/cats" style="width: 800px; height: 400px; text-align: center;" class="rounded"/>
+        <p style="margin: 30px auto; font-size: 1.5em; font-weight: 300;">
+            Welcome to this thing.  You can find exactly what you want here. <br/>
+            Give it a shot.  I fucking dare you.
+        </p>
+    </div>
+
 }

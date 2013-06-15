@@ -11,5 +11,9 @@ libraryDependencies ++= Seq(
 //	"be.objectify" %% "deadbolt-scala" % "2.0-SNAPSHOT",
 	"com.restfb" % "restfb" % "1.6.11",
 	"commons-codec" % "commons-codec" % "1.7",
+//	"org.ccil.cowan.tagsoup" % "tagsoup" % "1.2.1",
+//	"net.sourceforge.nekohtml" % "nekohtml" % "1.9.18",
+	"org.jsoup" % "jsoup" % "1.7.2",
+	"de.sven-jacobs" % "loremipsum" % "1.0",
 	"org.clapper" %% "grizzled-slf4j" % "1.0.1"
 )
