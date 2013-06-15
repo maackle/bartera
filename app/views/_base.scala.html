@@ -47,19 +47,10 @@
 
             <section class="top-bar-section">
                     <!-- Left Nav Section -->
-                <ul class="left">
-                    @if(User.isAuthenticated) {
 
-                    } else {
-                        <li><a href="/about">about</a></li>
-                    }
-
-                    <li class="divider"></li>
-
-                </ul>
 
                     <!-- Right Nav Section -->
-                <ul class="right">
+                <ul class="left">
                     @if(User.isAuthenticated) {
                         <li class="divider show-for-small"></li>
                         <li><a href="@routes.Haves.index">haves</a></li>

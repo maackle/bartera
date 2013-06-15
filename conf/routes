@@ -23,5 +23,7 @@ POST    /haves/:id                  controllers.Haves.update(id:Long)
 POST    /haves/:id/image            controllers.Haves.addImage(id:Long)
 DELETE  /haves/:id/image/:image_id  controllers.Haves.deleteImage(id:Long, image_id:Long)
 
+GET     /dev/populate/:haves/:images               controllers.dev.Populator.populate(haves:Int, images:Int)
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

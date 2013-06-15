@@ -1,6 +1,6 @@
 package models
 
-import play.api.mvc.{AnyContent, Request, Security}
+import play.api.mvc.{Request, Security}
 
 case class User(
 						email: String,

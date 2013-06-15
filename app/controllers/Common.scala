@@ -27,6 +27,34 @@ trait Common extends Controller with app.Common {
 		)
 	}
 
+	implicit object AjaxResultFormat extends Format[AjaxResult] {
+		def reads(json:JsValue) = {
+			???
+//			val code = (json \ "code").as[Int]
+//			code match {
+//				case AjaxResult.Code.SUCCESS =>
+//					AjaxSuccess( (json \ "data").as[JsValue] )
+//				case AjaxResult.Code.ERROR =>
+//					Error( (json \ "message").as[String] )
+//			}
+		}
+
+		def writes(r:AjaxResult):JsValue = JsObject{
+			r match {
+				case s:AjaxSuccess =>
+					List(
+						"code" -> JsNumber(s.code.id),
+						"data" -> s.data
+					)
+				case e:AjaxError =>
+					List(
+						"code" -> JsNumber(e.code.id),
+						"message" -> JsString(e.message)
+					)
+			}
+		}
+	}
+
 	trait AjaxResult {
 		val code:AjaxResult.Code.Value
 		implicit def toJson = Json.toJson(this)
@@ -41,39 +69,12 @@ trait Common extends Controller with app.Common {
 
 	}
 
-	implicit object AjaxResultFormat extends Format[AjaxResult] {
-		def reads(json:JsValue) = {
-			???
-//			val code = (json \ "code").as[Int]
-//			code match {
-//				case AjaxResult.Code.SUCCESS =>
-//					Success( (json \ "data").as[JsValue] )
-//				case AjaxResult.Code.ERROR =>
-//					Error( (json \ "message").as[String] )
-//			}
-		}
 
-		def writes(r:AjaxResult):JsValue = JsObject{
-			r match {
-				case s:Success =>
-					List(
-						"code" -> JsNumber(s.code.id),
-						"data" -> s.data
-					)
-				case e:Error =>
-					List(
-						"code" -> JsNumber(e.code.id),
-						"message" -> JsString(e.message)
-					)
-			}
-		}
-	}
-
-	case class Success(data: JsValue = JsNull) extends AjaxResult {
+	case class AjaxSuccess(data: JsValue = JsNull) extends AjaxResult {
 		val code = AjaxResult.Code.SUCCESS
 		implicit def toResult = Ok(this.toJson)
 	}
-	case class Error(message: String) extends AjaxResult {
+	case class AjaxError(message: String) extends AjaxResult {
 		val code = AjaxResult.Code.ERROR
 		implicit def toResult = BadRequest(this.toJson)
 	}

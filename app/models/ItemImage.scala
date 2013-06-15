@@ -7,6 +7,7 @@ import java.awt.{RenderingHints, Rectangle}
 
 import play.api._
 import play.api.mvc._
+import play.api.Play._
 
 trait DBImage extends IdPK {
 	def master:Array[Byte]
@@ -83,12 +84,23 @@ trait ImageOps {
 import ImageOps._
 
 object ImageOps {
-	implicit def bim2ops(bim:BufferedImage):ImageOps = new ImageOps { val im = bim }
+	implicit def bim2ops(bim:BufferedImage):ImageOps = {
+		require(bim != null, throw new Exception("null image"))
+		new ImageOps { val im = bim }
+	}
 }
 
 case class ItemImage(val master:Array[Byte], val clipRect:Rectangle, val contentType:String) extends DBImage {
 
-	lazy val image = ImageIO.read(new ByteArrayInputStream(master))
+	lazy val image = {
+		require(master != null, throw new Exception("null master image"))
+		val bis = new ByteArrayInputStream(master)
+		val bim = ImageIO.read(bis)
+		require(bim != null, {println(bis); throw new Exception("null bim image")})
+		bim
+	}
+
+	lazy val thumbURL = (controllers.routes.Application.viewImage(id, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size"))))
 
 	def serve(size:Int) = {
 		val resized = image.cropAspect(1.0).resizeProportionally(size, size)
@@ -112,6 +124,10 @@ object ItemImage extends MetaModel[ItemImage] {
 		fis.read(bytes)
 		bytes
 	}
+//
+//	def create(bytes:Array[Byte], contentType:String) = {
+//
+//	}
 
 	def create(file:File, contentType:String) = {
 

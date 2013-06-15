@@ -31,10 +31,28 @@
   }
 }
 
+.rounded {
+  @include border-radius(6px);
+}
+
+.button {
+  cursor: pointer;
+}
+
+.align-left { text-align: left; }
+.align-center { text-align: center; }
+.align-right { text-align: right; }
+
+.empty-notice {
+  font-style: italic;
+}
 
 .upload-form {
   .gallery {
-    .preview {
+    margin: 15px auto;
+
+    .thumb {
+      position: relative;
       width: $image-preview-size;
       height: $image-preview-size;
       display: inline-block;
@@ -43,23 +61,35 @@
       border: 1px solid #333;
       @include border-radius(5px);
 
-      &.adder {
-        $color: darkseagreen;
-        cursor: pointer;
-        background: $color;
+      .controls .delete {
+        $size: 32px;
+        color: $alert-color;
+        font-size: $size;
+        font-weight: bold;
+        line-height: $size;
+        margin: 0;
         padding: 0;
-        font-size: 80px;
         text-align: center;
-        line-height: $image-preview-size;
+        position: absolute;
+        width: $size;
+        height: $size;
+        right: -$size/2;
+        top: -$size/2;
+        background: white;
+        border: 1px solid #777;
+        @include border-radius($size/2);
+      }
 
-        &:hover {
-          background: lighten($color, 12%);
-        }
-
-        &:active {
-          background: darken($color, 15%);
+      &:hover {
+        .controls {
+          display: block;
         }
       }
+    }
+
+    .adder {
+      //font-size: 14px;
+
     }
   }
 
@@ -73,10 +103,60 @@
   }
 }
 
+.have-list {
+  table {
+    $thumb-size: 50px;
+    width: 100%;
+
+    tr {
+      position: relative;
+
+      th {
+        &.image {
+          width: $thumb-size + 20px;
+        }
+      }
+
+      td {
+
+        &.image {
+          width: $thumb-size;
+          img.thumb {
+            width: $thumb-size;
+            height: $thumb-size;
+          }
+        }
+
+      }
+
+      .actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+
+        a {
+          visibility: hidden;
+          margin: auto 5px;
+        }
+      }
+
+      &:hover {
+        .actions {
+          a {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+}
+
 body {
 
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 .ajax-post {

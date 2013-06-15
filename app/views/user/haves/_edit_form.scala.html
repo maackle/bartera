@@ -4,19 +4,33 @@
         @helper.inputText(form("what"))
         @helper.textarea(form("description"))
 
-        <div class="gallery dropzone">
-            @for(url <- have.thumbURLs) {
-                <div class="preview">
-                    <img src="@url" />
-                </div>
-            }
-            <div class="preview adder">
-                +
-            </div>
+        <div class="align-right">
+            <input type="submit" value="Update" class="button" />
+            <a href="@routes.Haves.index" class="button secondary">Cancel</a>
         </div>
 
-        <input name="images[]" type="file" class="file-add-input" multiple />
-        <input type="submit" />
+        <div class="panel">
+            <h3>Images</h3>
+            <div class="gallery">
+                <div class="empty-notice @if( ! have.imageObjects.isEmpty) { no-show }">No images.  Upload some!</div>
+            @if(have.imageObjects.isEmpty) {
+            } else {
+                @for(im <- have.imageObjects; url = im.thumbURL) {
+                    <div class="thumb" data-id="@im.id">
+                        <div class="controls">
+                            <a class="delete" href="#">&times;</a>
+                        </div>
+                        <img src="@url" />
+                    </div>
+                }
+            }
+            </div>
+            <div class="button small adder">
+                + Upload Images
+            </div>
+            <input name="images[]" type="file" class="file-add-input" multiple />
+        </div>
+
 
     }
 

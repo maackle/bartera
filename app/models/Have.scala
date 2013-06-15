@@ -10,12 +10,14 @@ import play.api.Play.current
 
 case class Have(
 						what: String,
-						description: String = "",
-						user_id:Long = 0L
+						description: String,
+						user_id:Long
 						) extends ItemBase {
 	def this() = this("", "", 0L)
 
 	lazy val images = DB.haveImages.left(this)
+
+	def imageObjects = transaction { images.toArray }
 
 	lazy val thumbURLs = transaction { images.map(_.id).map(controllers.routes.Application.viewImage(_, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size")))) }
 

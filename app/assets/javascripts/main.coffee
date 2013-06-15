@@ -29,22 +29,47 @@ $ ->
       fu.on 'fileuploadprocessalways', (e, data) =>
         for file, index in data.files
           $preview = $("""
-                     <div class="preview">
-                     </div>
+            <div class="thumb preview">
+            </div>
                      """)
           this.$gallery.append $preview
 
           if file.preview
             $preview.append(file.preview)
 
+          @update()
+
       fu.on 'fileuploaddone', (e, data) =>
         console.log data
 
-      $('.preview.adder').click (e) =>
+      @$container.find('.adder').click (e) =>
         @$fileinput().trigger 'click'
+
+      @$container.find('.controls .delete').click (e) =>
+        $thumb = $(e.target).closest('.thumb')
+        img_id = $thumb.attr('data-id')
+        x = $.ajax
+          url: "/haves/#{ @have_id }/image/#{ img_id }"
+          type: 'delete'
+
+        x.done (data) =>
+          $thumb.fadeOut (el)=>
+            $thumb.remove()
+            @update()
+
 
       $(document).bind 'drop dragover', (e) ->
         e.preventDefault()
+
+
+    update: ->
+      $thumbs = $('.gallery .thumb')
+      console.log $thumbs.length
+      if $thumbs.length > 0
+        @$container.find('.empty-notice').hide()
+      else
+        @$container.find('.empty-notice').show()
+
 
   for form in $('.have-edit-form')
     console.log form

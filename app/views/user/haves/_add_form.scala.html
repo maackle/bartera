@@ -3,6 +3,7 @@
     @helper.form(routes.Haves.add, 'enctype -> "multipart/form-data") {
         @helper.inputText(addHaveForm("what"))
         @helper.textarea(addHaveForm("description"))
+        <input type="submit" value="Add" class="button" />
     }
 
     @addHaveForm.globalError.map { error =>

@@ -15,8 +15,6 @@ object Application extends Common {
 	def viewImage(image_id:Long, size:Int) = Action {
 		val image = transaction { ItemImage.table.get(image_id) }
 		val (bytes, contentType) = image.serve(size)
-		Ok(bytes).withHeaders(
-			"Content-type" -> contentType
-		)
+		Ok(bytes).as(contentType)
 	}
 }

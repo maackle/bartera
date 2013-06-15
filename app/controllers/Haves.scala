@@ -81,11 +81,22 @@ object Haves extends Secured {
 
 		require(images.length == 1, "there should only be one image uploaded at a time")
 
-		Success(Json.toJson(Map("image" -> images.head.id))).toResult
+		AjaxSuccess(Json.toJson(Map("image" -> images.head.id))).toResult
 	}
 
 	def deleteImage(have_id:Long, image_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		Success().toResult
+		val success = transaction {
+			val have = Have.table.get(have_id)
+			val image = ItemImage.table.get(image_id)
+			have.images.dissociate(image)
+
+		}
+		if(success) {
+			AjaxSuccess().toResult
+		}
+		else {
+			AjaxError("couldn't delete image").toResult
+		}
 	}
 
 	object Forms {

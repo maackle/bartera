@@ -26,6 +26,10 @@ object DB extends Schema {
 	val haveImages = manyToManyRelation(haves, itemImages).via[HaveImage]((h, i, hi) => (h.id === hi.have_id, hi.image_id === i.id))
 	val wantImages = manyToManyRelation(wants, itemImages).via[WantImage]((w, i, wi) => (w.id === wi.want_id, wi.image_id === i.id))
 
+	on(haves)(t => declare(
+		(t.description) is (dbType("text"))
+	))
+
 //	def q(query: String, args: Any*) = new RawTupleQuery(query, args)
 }
 
