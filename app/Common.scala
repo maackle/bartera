@@ -14,6 +14,8 @@ trait Common
 	def msgInfo(text:String*) = "msg-info" -> text.mkString("\n")
 	def msgError(text:String*) = "msg-error" -> text.mkString("\n")
 
+	def flashConsole(text:String*) = "debug-flash-console" -> text.mkString("<li>", "</li><li>", "</li>")
+
 	def app = play.api.Play.current
 
 	def noImageURL(size:Int) = {

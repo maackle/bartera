@@ -4,9 +4,9 @@
     <div class="align-center">
         <img src="/assets/images/logo.png" style="margin: 30px auto 60px;"/>
 
-        @helper.form(routes.Application.index) {
+        @helper.form(routes.Search.haves) {
             <h2>What are you looking for? <sup>&reg;&trade;$</sup></h2>
-            <input type="text" class="search big-search" />
+            <input name="q" type="text" class="search big-search" />
             <input type="submit" class="button" value="Search" />
         }
 

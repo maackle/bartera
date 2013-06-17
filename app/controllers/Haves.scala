@@ -4,6 +4,7 @@ import play.api.data.Form
 import play.api.data.Forms._
 import models.{ItemImage, User, Have}
 import play.api.libs.json.Json
+import play.api.mvc.Action
 
 
 object Haves extends Secured {
@@ -32,8 +33,18 @@ object Haves extends Secured {
 		)
 	}
 
+	def detail(have_id:Long) = Action { implicit request =>
+		transaction(Have.table.lookup(have_id)).map { have =>
+			Ok(views.html.haves.detail(have))
+		}
+		.getOrElse {
+			Redirect(routes.Application.index).flashing(msgError("This item does not exist or has been removed."))
+		}
+
+	}
+
 	def edit(have_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		transaction (Have.table.lookup(have_id)).map { have =>
+		transaction(Have.table.lookup(have_id)).map { have =>
 			Ok(views.html.user.haves.edit(Forms.editHave.fill(have), have))
 		}
 		.getOrElse {

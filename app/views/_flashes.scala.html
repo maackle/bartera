@@ -21,3 +21,10 @@
     </div>
 }
 
+@flash.get("debug-flash-console").map { msg =>
+    <ul class="debug-flash-console">
+        <h2>CONSOLE</h2>
+        @msg
+    </ul>
+}
+

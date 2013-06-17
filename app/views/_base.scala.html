@@ -79,13 +79,10 @@
         </nav>
 
         <div class="container">
-            <div class="row">
-                <div class="twelve columns">
-                    <div class="messages">
-                    @views.html._flashes(request.flash)
-                    </div>
-                </div>
+            <div class="messages">
+            @views.html._flashes(request.flash)
             </div>
+
             <div class="content-wrapper">
             @content
             </div>

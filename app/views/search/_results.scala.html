@@ -1,0 +1,5 @@
+@(results:Seq[Have])(implicit request:Request[_])
+
+<div class="search-results haves">
+    @views.html.haves._list(results)
+</div>

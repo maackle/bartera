@@ -1,0 +1,29 @@
+@(haves:Seq[Have])(implicit request: Request[_])
+
+<div class="have-list">
+    @if(haves.isEmpty) {
+        <div class="empty-notice">You have no haves!  Start adding.</div>
+    } else {
+        <table>
+            <thead>
+                <tr>
+                    <th class="image"></th>
+                    <th class="what">what</th>
+                    <th class="description">description</th>
+                </tr>
+            </thead>
+            <tbody>
+            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse(app.Common.noImageURL(50))) {
+                <tr>
+                    <td class="image">
+                        <img class="thumb" src="@thumbURL" />
+                    </td>
+                    <td><a href="@routes.Haves.detail(have.id)">@have.what</a></td>
+                    <td>@have.description</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+
+</div>

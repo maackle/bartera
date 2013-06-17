@@ -4,6 +4,7 @@ import org.squeryl._
 import org.squeryl.dsl._
 import org.squeryl.PrimitiveTypeMode._
 import org.squeryl.dsl.CompositeKey2
+import play.api.mvc.{SimpleResult, Call}
 
 object DB extends Schema {
 
@@ -41,6 +42,13 @@ trait IdPK extends KeyedEntity[Long] {
 
 trait MetaModel[T] extends PrimitiveTypeMode {
 	val table:Table[T]
+
+//	def getOrRedirect(id:Long, call:Call)(fn: T => SimpleResult) = {
+//		table.lookup(id).map { obj =>
+//			fn(obj)
+//		}
+//		.getOrElse{ Redirect(call) }
+//	}
 
 }
 

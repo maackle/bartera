@@ -1,0 +1,13 @@
+@(formHave:Form[_], results:Seq[Have])(implicit request:Request[_])
+
+@_base("search") {
+
+    @views.html.search._search_haves_form(formHave)
+
+    @if(results.isEmpty) {
+        <div class="empty-notice">No results.</div>
+    } else {
+        <h2>Results</h2>
+        @views.html.search._results(results)
+    }
+}

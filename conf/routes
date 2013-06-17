@@ -13,17 +13,24 @@ POST    /signup                     controllers.Auth.register
 
 GET     /image/:id/:size            controllers.Application.viewImage(id:Long, size:Int)
 
-GET     /dev/schema/rebuild         controllers.dev.Schema.rebuild
-
 GET     /haves                      controllers.Haves.index
 POST    /haves                      controllers.Haves.add
-GET     /haves/:id                  controllers.Haves.edit(id:Long)
-POST    /haves/:id                  controllers.Haves.update(id:Long)
+GET     /haves/:id                  controllers.Haves.detail(id:Long)
+
+GET     /haves/:id/edit             controllers.Haves.edit(id:Long)
+POST    /haves/:id/edit             controllers.Haves.update(id:Long)
 
 POST    /haves/:id/image            controllers.Haves.addImage(id:Long)
 DELETE  /haves/:id/image/:image_id  controllers.Haves.deleteImage(id:Long, image_id:Long)
 
+GET     /search/haves               controllers.Search.haves
+
+### DEV routes ##############################################################################################
+
+GET     /dev/schema/rebuild         controllers.dev.Schema.rebuild
 GET     /dev/populate/:haves/:images               controllers.dev.Populator.populate(haves:Int, images:Int)
+
+### static ##################################################################################################
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

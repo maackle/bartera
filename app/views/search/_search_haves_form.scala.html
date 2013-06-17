@@ -1,0 +1,13 @@
+@(form:Form[_])(implicit request:Request[_])
+
+@helper.form(routes.Search.haves) {
+
+    <!--
+    @helper.input(form("q")) { (id, name, value, args) =>
+        <input id="@id" name="@name" value="@value" />
+    }
+    -->
+    @helper.inputText(form("q"), '_label -> "What are you looking for?")
+    @helper.select(form("cat_id"), Seq("1"->"Cats"), '_label -> "In category:")
+    <input type="submit" value="Search" />
+}
