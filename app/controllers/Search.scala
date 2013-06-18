@@ -4,7 +4,8 @@ import play.api.mvc.Action
 
 import play.api.data.Form
 import play.api.data.Forms._
-import models.Have
+import models.{SQ, Have}
+import SQ._
 
 object Search extends Common {
 
@@ -15,11 +16,12 @@ object Search extends Common {
 
 	object Forms {
 
-		case class HaveQuery(q:String, cat_id:Option[Long])
+		case class HaveQuery(q:String, cat_id:Option[Long], zipcode:String)
 
 		val haves = Form( mapping(
 			"q" -> text,
-			"cat_id" -> optional(longNumber)
+			"cat_id" -> optional(longNumber),
+			"zipcode" -> Fields.zipcode
 		)(HaveQuery.apply)(HaveQuery.unapply))
 	}
 

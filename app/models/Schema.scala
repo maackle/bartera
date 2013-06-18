@@ -4,12 +4,15 @@ import org.squeryl._
 import org.squeryl.dsl._
 
 import org.squeryl.dsl.CompositeKey2
-import play.api.mvc.{SimpleResult, Call}
-import scala.collection.mutable.ArrayBuffer
 
-object Schema extends org.squeryl.Schema with PrimitiveTypeMode {
+object SQ extends PrimitiveTypeMode
+
+import SQ._
+
+object Schema extends org.squeryl.Schema {
 
 	val users = table[models.User]
+	val userProfiles = table[models.Profile]
 	val haves = table[models.Have]
 	val wants = table[models.Want]
 
@@ -35,6 +38,9 @@ object Schema extends org.squeryl.Schema with PrimitiveTypeMode {
 //	def q(query: String, args: Any*) = new RawTupleQuery(query, args)
 }
 
+trait Model {
+
+}
 
 trait IdPK extends KeyedEntity[Long] {
 	var id:Long = 0
@@ -42,7 +48,7 @@ trait IdPK extends KeyedEntity[Long] {
 }
 
 
-trait MetaModel[T] extends PrimitiveTypeMode {
+trait MetaModel[T] {
 	val table:Table[T]
 
 //	def getOrRedirect(id:Long, call:Call)(fn: T => SimpleResult) = {

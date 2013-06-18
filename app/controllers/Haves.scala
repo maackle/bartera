@@ -2,10 +2,11 @@ package controllers
 
 import play.api.data.Form
 import play.api.data.Forms._
-import models.{ItemImage, User, Have}
+import models.{SQ, ItemImage, User, Have}
 import play.api.libs.json.Json
 import play.api.mvc.Action
 
+import SQ._
 
 object Haves extends Secured {
 

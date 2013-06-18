@@ -8,11 +8,11 @@ import java.awt.Color
 
 
 trait Common
-	extends Logging
-	with org.squeryl.PrimitiveTypeMode {
+	extends Logging  {
 
 	def msgInfo(text:String*) = "msg-info" -> text.mkString("\n")
 	def msgError(text:String*) = "msg-error" -> text.mkString("\n")
+	def msgSuccess(text:String*) = "msg-success" -> text.mkString("\n")
 
 	def flashConsole(text:String*) = "debug-flash-console" -> text.mkString("<li>", "</li><li>", "</li>")
 
@@ -24,6 +24,10 @@ trait Common
 		val bgColor = "cccccc"
 		val fgColor = brights((math.random*num).toInt)
 		s"http://placehold.it/${size}x${size}/$bgColor/$fgColor&text=N/A"
+	}
+
+	def zipString(zip:Int) = {
+		"%05s".format(zip)
 	}
 
 	//  implicit def injectContext(request:Request[AnyContent]) = Context(request)

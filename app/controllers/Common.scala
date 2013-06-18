@@ -4,14 +4,19 @@ import play.api.mvc._
 import play.api.data.Form
 import play.api.templates.Html
 import play.api.libs.json._
-import play.api.libs.json.JsObject
-import play.api.libs.json
+import play.api.data.Forms._
 import play.api.libs.json.JsObject
 import play.api.libs.json.JsString
 import play.api.mvc.SimpleResult
 import play.api.libs.json.JsNumber
+import models.SQ
+import SQ._
 
 trait Common extends Controller with app.Common {
+
+	object Fields {
+		val zipcode = text(5, 5).verifying("Must be a valid 5-digit ZIP code", z => ("""\D""".r).findFirstIn(z).isEmpty)
+	}
 
 	def submission[A, B](form: Form[A])(
 		redirect:SimpleResult[B],

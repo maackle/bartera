@@ -1,0 +1,8 @@
+@(form:Form[_])(implicit request:Request[_], user:User)
+
+@_base("profile") {
+    @helper.form(routes.Profile.save) {
+        @helper.inputText(form("zipcode"))
+        <input type="submit" />
+    }
+}

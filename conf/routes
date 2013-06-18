@@ -23,6 +23,10 @@ POST    /haves/:id/edit             controllers.Haves.update(id:Long)
 POST    /haves/:id/image            controllers.Haves.addImage(id:Long)
 DELETE  /haves/:id/image/:image_id  controllers.Haves.deleteImage(id:Long, image_id:Long)
 
+
+GET     /my/profile                controllers.Profile.edit
+POST    /my/profile                controllers.Profile.save
+
 GET     /search/haves               controllers.Search.haves
 
 ### DEV routes ##############################################################################################

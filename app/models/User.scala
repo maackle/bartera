@@ -2,15 +2,18 @@ package models
 
 import play.api.mvc.{Request, Security}
 
+import SQ._
+
 case class User(
 						email: String,
-						passhash: String,
-						userprofile_id: Long = 0L
+						passhash: String
 						) extends IdPK {
 
-	def this() = this("", "", 0L)
+//	def this() = this("", "")
 
 	val username = email
+
+	def profile = transaction { Profile.table.where(_.user_id === id).head }
 
 	lazy val haves = Schema.userHaves.left(this)
 	lazy val wants = Schema.userWants.left(this)
@@ -29,14 +32,16 @@ object User extends MetaModel[User] {
 		table.where(_.username === username).headOption
 	}
 
-	def isAuthenticated(implicit request:Request[_]) = request.session.get(Security.username).flatMap(User.lookupByName(_))
+	def currentUser(implicit request:Request[_]) = request.session.get(Security.username).flatMap(User.lookupByName(_))
 
 	def authenticate(username: String, password: String):Option[User] = inTransaction {
 		// TODO: use SHA1
 		table.where( u => u.username === username and u.passhash === password ).headOption
 	}
 
-	def register(newUser:User) = inTransaction {
-		table.insert(newUser)
+	def register(newUser:User) = transaction {
+		val user = table.insert(newUser)
+		Profile.table.insert(Profile.blank(user))
+		user
 	}
 }

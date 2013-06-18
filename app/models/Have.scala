@@ -1,13 +1,8 @@
 package models
 
-import java.io.{ByteArrayOutputStream, FileInputStream, File}
-import javax.imageio.ImageIO
-import java.awt.image.BufferedImage
-import javax.imageio.stream.ImageOutputStream
-import org.squeryl.PrimitiveTypeMode
-import PrimitiveTypeMode._
 import play.api.Play.current
 
+import SQ._
 case class Have(
 						what: String,
 						description: String,
@@ -27,15 +22,3 @@ object Have extends MetaModel[Have] {
 	val table = Schema.haves
 }
 
-
-//case class HaveImage(
-//							  have_id: Long,
-//							  image: Array[Byte],
-//							  contentType: String
-//							  ) extends DBImage {
-//
-//}
-//
-//object HaveImage extends MetaModel[HaveImage] {
-//	val table = Schema.haveImages
-//}

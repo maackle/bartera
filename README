@@ -7,6 +7,13 @@ This file will be packaged with your application, when using `play dist`.
 Installing PostGIS
 ==================
 
+in ubuntu:
+
+    sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
+    sudo apt-get install postgis
+
+then in psql:
+
     CREATE EXTENSION postgis;
-    grant usage on schema public to bartera_dev;
+    grant usage on schema public to bartera_dev; # maybe unnecessary
     grant all on all tables in schema public to bartera_dev;

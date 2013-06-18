@@ -3,7 +3,7 @@ package controllers
 import play.api.mvc._
 import models.{Owned, User}
 
-trait Secured extends Controller with Common {
+trait Secured extends Common {
 
 	private def username(request:RequestHeader) = request.session.get(Security.username)
 

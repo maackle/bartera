@@ -3,7 +3,8 @@ package controllers
 import app.{DBEngine}
 import play.api._
 import play.api.mvc._
-import models.ItemImage
+import models.{SQ, ItemImage}
+import SQ._
 
 object Application extends Common {
   

@@ -7,7 +7,7 @@ trait Owned {
 //	def owner:User = transaction { User.table.get(user_id) }
 }
 
-trait ItemBase extends IdPK with Owned {
+trait ItemBase extends IdPK with Owned with Model {
 
 	def what: String
 	def description: String

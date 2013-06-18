@@ -5,7 +5,7 @@ import org.squeryl.KeyedEntity
 case class Zipcode(
 							zipcode:Int
 							) extends KeyedEntity[Long] {
-	val id:Long = zipcode.toLong
+	def id:Long = zipcode.toLong
 }
 
 object Zipcode extends MetaModel[Zipcode] {

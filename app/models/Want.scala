@@ -11,8 +11,8 @@ case class Want(
 
 }
 
-object Want extends MetaModel[Have] {
-	val table = Schema.haves
+object Want extends MetaModel[Want] {
+	val table = Schema.wants
 }
 
 //

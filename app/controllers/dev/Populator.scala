@@ -8,14 +8,15 @@ import ExecutionContext.Implicits.global
 import org.jsoup.Jsoup
 import scala.collection.JavaConversions
 import JavaConversions._
-import models.{ItemImage, Have, User}
+import models.{SQ, ItemImage, Have, User}
 import de.svenjacobs.loremipsum.LoremIpsum
 import scala.concurrent.duration._
 import scala.util.{Success, Failure}
 
 import uk.co.halfninja.randomnames
 import uk.co.halfninja.randomnames.Gender
-import java.util.concurrent.TimeoutException
+
+import SQ._
 
 object Populator extends Common {
 
