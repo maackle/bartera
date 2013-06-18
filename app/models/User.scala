@@ -12,14 +12,14 @@ case class User(
 
 	val username = email
 
-	lazy val haves = DB.userHaves.left(this)
-	lazy val wants = DB.userWants.left(this)
+	lazy val haves = Schema.userHaves.left(this)
+	lazy val wants = Schema.userWants.left(this)
 
 	def isAdmin = false
 }
 
 object User extends MetaModel[User] {
-	val table = DB.users
+	val table = Schema.users
 
 	def getByName(username:String) = inTransaction {
 		table.where(_.username === username).head

@@ -15,7 +15,7 @@ case class Have(
 						) extends ItemBase {
 	def this() = this("", "", 0L)
 
-	lazy val images = DB.haveImages.left(this)
+	lazy val images = Schema.haveImages.left(this)
 
 	def imageObjects = transaction { images.toArray }
 
@@ -24,7 +24,7 @@ case class Have(
 }
 
 object Have extends MetaModel[Have] {
-	val table = DB.haves
+	val table = Schema.haves
 }
 
 
@@ -37,5 +37,5 @@ object Have extends MetaModel[Have] {
 //}
 //
 //object HaveImage extends MetaModel[HaveImage] {
-//	val table = DB.haveImages
+//	val table = Schema.haveImages
 //}

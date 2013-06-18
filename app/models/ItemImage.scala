@@ -116,7 +116,7 @@ case class ItemImage(val master:Array[Byte], val clipRect:Rectangle, val content
 }
 
 object ItemImage extends MetaModel[ItemImage] {
-	val table = DB.itemImages
+	val table = Schema.itemImages
 
 	def file2byteArray(file:File) = {
 		val bytes = new Array[Byte](file.length().toInt)

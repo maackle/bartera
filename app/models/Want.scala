@@ -7,12 +7,12 @@ case class Want(
 						) extends ItemBase {
 	def this() = this("", "", 0L)
 
-	lazy val images = DB.wantImages.left(this)
+	lazy val images = Schema.wantImages.left(this)
 
 }
 
 object Want extends MetaModel[Have] {
-	val table = DB.haves
+	val table = Schema.haves
 }
 
 //
@@ -25,5 +25,5 @@ object Want extends MetaModel[Have] {
 //}
 //
 //object WantImage extends MetaModel[WantImage] {
-//	val table = DB.wantImages
+//	val table = Schema.wantImages
 //}
