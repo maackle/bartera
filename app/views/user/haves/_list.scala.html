@@ -1,4 +1,5 @@
 @(haves:Seq[Have])(implicit request: Request[_])
+@import core.Common
 
 <div class="have-list">
     @if(haves.isEmpty) {
@@ -13,7 +14,7 @@
                 </tr>
             </thead>
             <tbody>
-            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse(app.Common.noImageURL(50))) {
+            @for(have <- haves; thumbURL = have.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50))) {
                 <tr>
                     <td class="image">
                         <img class="thumb" src="@thumbURL" />

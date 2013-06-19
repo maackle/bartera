@@ -29,7 +29,6 @@ object Populator extends Common {
 		WS.url("http://lorempixel.com/400/400/%s".format(channel)).get().map { response =>
 			val bytes = response.getAHCResponse.getResponseBodyAsBytes()
 			val contentType = response.getAHCResponse.getContentType
-			println(bytes.mkString(" "))
 			ItemImage(bytes, null, contentType)
 		}
 	}
@@ -48,8 +47,15 @@ object Populator extends Common {
 
 
 	private def createHave(user:User, what:String, numImages:Int, channel:String) = {
+
+		val zips = Settings.zipcodeSubset.toIndexedSeq
+
+		def randomZip = zips((math.random * zips.length).toInt)
+
 		transaction {
-			val have = Have.table.insert(Have(what, randomDescription, user.id))
+			val t = Have(what, randomDescription, user.id)
+			t.setZipcode(randomZip)
+			val have = Have.table.insert(t)
 			for (_ <- 1 to numImages) {
 				getImage(channel).onComplete {
 					case Success(im) =>

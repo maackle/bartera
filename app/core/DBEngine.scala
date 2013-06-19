@@ -1,4 +1,4 @@
-package app
+package core
 
 trait DBEngine {
 	val driverName:String

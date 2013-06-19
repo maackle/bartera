@@ -1,4 +1,4 @@
-package app
+package core
 
 import play.api.data.Form
 import play.api.mvc.{AnyContent, Request, SimpleResult}
@@ -16,7 +16,7 @@ trait Common
 
 	def flashConsole(text:String*) = "debug-flash-console" -> text.mkString("<li>", "</li><li>", "</li>")
 
-	def app = play.api.Play.current
+	implicit def app = play.api.Play.current
 
 	def noImageURL(size:Int) = {
 		val num = 6

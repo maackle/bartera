@@ -9,6 +9,8 @@ case class Want(
 
 	lazy val images = Schema.wantImages.left(this)
 
+	def meta = Want
+
 }
 
 object Want extends MetaModel[Want] {

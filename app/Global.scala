@@ -6,6 +6,7 @@ import org.squeryl.adapters.{H2Adapter, PostgreSqlAdapter}
 import play.api.db.DB
 import play.api.{GlobalSettings, Play, Application}
 
+
 object Global extends GlobalSettings with Logging {
 
 	override def onStart(app: Application) {
@@ -15,6 +16,10 @@ object Global extends GlobalSettings with Logging {
 			case Some("org.postgresql.Driver") => Some(() => getSession(new PostgreSqlAdapter, app))
 			case _ => sys.error("Database driver must be either org.h2.Driver or org.postgresql.Driver")
 		}
+
+//		DB.withConnection { implicit c =>
+//			anorm.SQL("SET search_path TO public;").execute()
+//		}(app)
 	}
 
 	def getSession(adapter:DatabaseAdapter, app: Application) = Session.create(DB.getConnection()(app), adapter)

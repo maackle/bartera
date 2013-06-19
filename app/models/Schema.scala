@@ -38,8 +38,8 @@ object Schema extends org.squeryl.Schema {
 //	def q(query: String, args: Any*) = new RawTupleQuery(query, args)
 }
 
-trait Model {
-
+trait Model[+A] extends core.Common {
+	def meta:MetaModel[_ <: A]
 }
 
 trait IdPK extends KeyedEntity[Long] {

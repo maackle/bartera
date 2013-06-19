@@ -1,4 +1,4 @@
-@(formHave:Form[_], results:Seq[Have])(implicit request:Request[_])
+@(formHave:Form[_], results:Seq[Search.SearchResultHave])(implicit request:Request[_])
 
 @_base("search") {
 
@@ -8,6 +8,39 @@
         <div class="empty-notice">No results.</div>
     } else {
         <h2>Results</h2>
-        @views.html.search._results(results)
+        <div class="search-results haves">
+            <div class="have-list">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="image"></th>
+                            <th class="what">what</th>
+                            <th class="distance">distance</th>
+                            <th class="description">description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @for(Search.SearchResultHave(distance_km, have) <- results; thumbURL = have.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50)); distance_mi = distance_km*0.621371 ) {
+                        <tr>
+                            <td class="image">
+                                <img class="thumb" src="@thumbURL" />
+                            </td>
+                            <td><a href="@routes.Haves.detail(have.id)">@have.what</a></td>
+                            <td>@if(distance_mi >= 100) {
+                                    @("%,1.0f".format(distance_mi))
+                                } else {
+                                    @("%,.1f".format(distance_mi))
+                                }
+                                miles
+                            </td>
+                            <td>@have.description</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
     }
 }

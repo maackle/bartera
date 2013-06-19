@@ -7,7 +7,7 @@ case class Have(
 						what: String,
 						description: String,
 						user_id:Long
-						) extends ItemBase {
+						) extends ItemBase with HasLocation {
 	def this() = this("", "", 0L)
 
 	lazy val images = Schema.haveImages.left(this)
@@ -16,6 +16,7 @@ case class Have(
 
 	lazy val thumbURLs = transaction { images.map(_.id).map(controllers.routes.Application.viewImage(_, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size")))) }
 
+	def meta = Have
 }
 
 object Have extends MetaModel[Have] {

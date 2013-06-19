@@ -6,6 +6,8 @@ case class Zipcode(
 							zipcode:Int
 							) extends KeyedEntity[Long] {
 	def id:Long = zipcode.toLong
+
+	def meta = Zipcode
 }
 
 object Zipcode extends MetaModel[Zipcode] {

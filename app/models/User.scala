@@ -19,6 +19,8 @@ case class User(
 	lazy val wants = Schema.userWants.left(this)
 
 	def isAdmin = false
+
+	def meta = User
 }
 
 object User extends MetaModel[User] {

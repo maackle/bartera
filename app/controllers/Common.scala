@@ -12,7 +12,7 @@ import play.api.libs.json.JsNumber
 import models.SQ
 import SQ._
 
-trait Common extends Controller with app.Common {
+trait Common extends Controller with core.Common {
 
 	object Fields {
 		val zipcode = text(5, 5).verifying("Must be a valid 5-digit ZIP code", z => ("""\D""".r).findFirstIn(z).isEmpty)
