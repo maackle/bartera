@@ -99,24 +99,30 @@ case class ItemImage(val master:Array[Byte], val clipRect:Rectangle, val content
 		require(bim != null, {println(bis); throw new Exception("null bim image")})
 		bim
 	}
+	import ItemImage.thumbSize
 
-	lazy val thumbURL = (controllers.routes.Application.viewImage(id, current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size"))))
+	lazy val thumbURL = (controllers.routes.Application.viewImage(id, thumbSize, thumbSize))
 
-	def serve(size:Int) = {
-		val resized = image.cropAspect(1.0).resizeProportionally(size, size)
+	def url(width:Int, height:Int) = (controllers.routes.Application.viewImage(id, width, height))
+
+	def serve(width:Int, height:Int) = {
+		val aspect = width.toFloat / height.toFloat
+		val resized = image.cropAspect(aspect).resizeProportionally(width, height)
 		(resized.toBytes, contentType)
 	}
-
-	def serve(size:Int, crop:Option[Rectangle]) = {
-		val im = crop.map(image.crop(_)).getOrElse(image)
-		val resized = im.resizeProportionally(size, size)
-		(resized.toBytes, contentType)
-	}
+//
+//	def serve(width:Int, height:Int, crop:Option[Rectangle]) = {
+//		val im = crop.map(image.crop(_)).getOrElse(image)
+//		val resized = im.resizeProportionally(width, height)
+//		(resized.toBytes, contentType)
+//	}
 
 }
 
 object ItemImage extends MetaModel[ItemImage] {
 	val table = Schema.itemImages
+
+	lazy val thumbSize = current.configuration.getInt("haves.thumbnail_size").getOrElse(throw new Exception("must set haves.thumbnail_size"))
 
 	def file2byteArray(file:File) = {
 		val bytes = new Array[Byte](file.length().toInt)

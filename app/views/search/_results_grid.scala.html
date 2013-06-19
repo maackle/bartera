@@ -1,0 +1,27 @@
+@(results:Seq[Search.SearchResultHave])(implicit request:Request[_])
+
+@if(results.isEmpty) {
+    <div class="empty-notice">No results.</div>
+} else {
+    <h2>Results</h2>
+    <div class="search-results haves-grid">
+
+        @for(Search.SearchResultHave(distance_km, have) <- results; thumbURL = have.imageObjects.headOption.map(_.url(150, 100)).getOrElse(core.Common.noImageURL(100)); distance_mi = distance_km*0.621371 ) {
+            <div class="item">
+                <div class="image"><img class="thumb" src="@thumbURL" /></div>
+                <div class="what"><a href="@routes.Haves.detail(have.id)">@have.what</a></div>
+                <div class="distance">
+                    @if(distance_mi >= 100) {
+                        @("%,1.0f".format(distance_mi))
+                    } else {
+                        @("%,.1f".format(distance_mi))
+                    }
+                    miles
+                </div>
+                <div class="description">@have.description</div>
+            </div>
+        }
+
+    </div>
+}
+

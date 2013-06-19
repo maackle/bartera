@@ -1,7 +1,7 @@
 @(haves:Seq[Have])(implicit request: Request[_])
 @import core.Common
 
-<div class="have-list">
+<div class="haves-list">
     @if(haves.isEmpty) {
         <div class="empty-notice">You have no haves!  Start adding.</div>
     } else {

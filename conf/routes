@@ -11,7 +11,8 @@ GET     /logout                     controllers.Auth.deauthenticate
 GET     /signup                     controllers.Auth.signup
 POST    /signup                     controllers.Auth.register
 
-GET     /image/:id/:size            controllers.Application.viewImage(id:Long, size:Int)
+#GET     /image/:id/:size                      controllers.Application.viewImage(id:Long, size:Int, height:Int = -1)
+GET     /image/:id/$width<[0-9]+>x$height<[0-9]+>   controllers.Application.viewImage(id:Long, width:Int, height:Int)
 
 GET     /haves                      controllers.Haves.index
 POST    /haves                      controllers.Haves.add

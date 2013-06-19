@@ -123,7 +123,7 @@ select {
   }
 }
 
-.have-list {
+.haves-list {
   table {
     $thumb-size: 50px;
     width: 100%;
@@ -170,6 +170,28 @@ select {
       }
     }
   }
+}
+
+.haves-grid {
+  .item {
+    @include span-columns(3);
+    $L: columns(3, 12, static);
+    height: 200px;
+    &:nth-child(4n) {
+      @include omega;
+    }
+
+    .description {
+      //position: absolute;
+      display: none;
+    }
+
+    .thumb {
+      width: $L;
+      height: auto;
+    }
+  }
+
 }
 
 body {
