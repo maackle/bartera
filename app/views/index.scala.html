@@ -1,14 +1,26 @@
-@(message: String)(implicit request:Request[_])
+@()(implicit request:Request[_])
 
 @_base("home") {
     <div class="align-center">
         <img src="/assets/images/logo.png" style="margin: 30px auto 60px;"/>
 
-        @helper.form(routes.Search.haves) {
-            <h2>What are you looking for? <sup>&reg;&trade;$</sup></h2>
-            <input name="q" type="text" class="search big-search" />
-            <input type="submit" class="button" value="Search" />
-        }
+        <div class="home-search">
+            <div class="search-haves">
+                @helper.form(routes.Search.haves) {
+                    <h2>Find people who HAVE:</h2>
+                    <input name="q" type="text" class="search big-search" />
+                    <input type="submit" class="button" value="Search" />
+                }
+            </div>
+            <div class="search-wants">
+                @helper.form(routes.Search.haves) {
+                    <h2>Find people who WANT:</h2>
+                    <input name="q" type="text" class="search big-search" />
+                    <input type="submit" class="button" value="Search" />
+                }
+            </div>
+        </div>
+
 
         <img src="http://lorempixel.com/800/400/cats" style="width: 800px; height: 400px; text-align: center;" class="rounded"/>
         <p style="margin: 30px auto; font-size: 1.5em; font-weight: 300;">

@@ -48,7 +48,6 @@ object Schema extends Common {
 				"""
 				  |CREATE TABLE locations (
 				  |	id SERIAL,
-				  |	geohash VARCHAR(16),
 				  |	zipcode VARCHAR(5) NULL,
 				  |	text VARCHAR(256) NULL,
 				  |	latlng Geography(Point)
@@ -67,12 +66,12 @@ object Schema extends Common {
 			lng = chunks(8)
 			if zipSubset.isEmpty || zipSubset.get.contains(zip)
 		} yield {
-			Location("XXX", Some(zip), LatLng(lat.toFloat, lng.toFloat), 0L)
+			Location(Some(zip), LatLng(lat.toFloat, lng.toFloat), 0L)
 		}
-		val plan = """PREPARE fooplan (text, text, geography, int) AS
-						 	INSERT INTO locations (geohash, zipcode, latlng, id) VALUES($1, $2, $3, $4);"""
+		val plan = """PREPARE fooplan (text, geography, int) AS
+						 	INSERT INTO locations (zipcode, latlng, id) VALUES($1, $2, $3);"""
 
-		val query = plan + locations.map( loc => s"EXECUTE fooplan('${loc.geohash}', '${loc.zipcode.get}', ${loc.latlng.geoString}, ${loc.id});").mkString("\n")
+		val query = plan + locations.map( loc => s"EXECUTE fooplan('${loc.zipcode.get}', ${loc.latlng.geoString}, ${loc.id});").mkString("\n")
 		SQL(query).execute()
 
 	}

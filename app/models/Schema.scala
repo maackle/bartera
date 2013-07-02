@@ -23,8 +23,9 @@ object Schema extends org.squeryl.Schema {
 	val userHaves = oneToManyRelation(users, haves).via((u, i) => u.id === i.user_id)
 	val userWants = oneToManyRelation(users, wants).via((u, i) => u.id === i.user_id)
 
-	class HaveImage(val have_id:Long, val image_id:Long) extends KeyedEntity[CompositeKey2[Long,Long]] { def id = compositeKey(have_id, image_id) }
-	class WantImage(val want_id:Long, val image_id:Long) extends KeyedEntity[CompositeKey2[Long,Long]] { def id = compositeKey(want_id, image_id) }
+	trait ItemImageRelation extends KeyedEntity[CompositeKey2[Long,Long]]
+	class HaveImage(val have_id:Long, val image_id:Long) extends ItemImageRelation { def id = compositeKey(have_id, image_id) }
+	class WantImage(val want_id:Long, val image_id:Long) extends ItemImageRelation { def id = compositeKey(want_id, image_id) }
 
 //	val haveHaveImages = oneToManyRelation(haves, haveImages).via((h, i) => h.id === i.have_id)
 //	val wantWantImages = oneToManyRelation(wants, wantImages).via((w, i) => w.id === i.want_id)

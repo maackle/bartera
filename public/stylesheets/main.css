@@ -7021,45 +7021,44 @@ select {
 }
 
 /* line 127, ../../app/assets/sass/main.scss */
-.haves-list table {
+.search-results-container .items-list table {
   width: 100%;
 }
 /* line 131, ../../app/assets/sass/main.scss */
-.haves-list table tr {
+.search-results-container .items-list table tr {
   position: relative;
 }
 /* line 135, ../../app/assets/sass/main.scss */
-.haves-list table tr th.image {
+.search-results-container .items-list table tr th.image {
   width: 70px;
 }
 /* line 142, ../../app/assets/sass/main.scss */
-.haves-list table tr td.image {
+.search-results-container .items-list table tr td.image {
   width: 50px;
 }
 /* line 144, ../../app/assets/sass/main.scss */
-.haves-list table tr td.image img.thumb {
+.search-results-container .items-list table tr td.image img.thumb {
   width: 50px;
   height: 50px;
 }
 /* line 152, ../../app/assets/sass/main.scss */
-.haves-list table tr .actions {
+.search-results-container .items-list table tr .actions {
   position: absolute;
   top: 0;
   left: 0;
   width: 150px;
 }
 /* line 158, ../../app/assets/sass/main.scss */
-.haves-list table tr .actions a {
+.search-results-container .items-list table tr .actions a {
   visibility: hidden;
   margin: auto 5px;
 }
 /* line 166, ../../app/assets/sass/main.scss */
-.haves-list table tr:hover .actions a {
+.search-results-container .items-list table tr:hover .actions a {
   visibility: visible;
 }
-
 /* line 176, ../../app/assets/sass/main.scss */
-.haves-grid .item {
+.search-results-container .items-grid .item {
   width: 23.63735%;
   float: left;
   margin-right: 1.81686%;
@@ -7067,86 +7066,94 @@ select {
   height: 200px;
 }
 /* line 180, ../../app/assets/sass/main.scss */
-.haves-grid .item:nth-child(4n) {
+.search-results-container .items-grid .item:nth-child(4n) {
   float: right;
   margin-right: 0;
   *margin-left: -1em;
   display: inline;
 }
 /* line 184, ../../app/assets/sass/main.scss */
-.haves-grid .item .description {
+.search-results-container .items-grid .item .description {
   display: none;
 }
 /* line 189, ../../app/assets/sass/main.scss */
-.haves-grid .item .thumb {
+.search-results-container .items-grid .item .thumb {
   width: 13.01em;
   height: auto;
 }
+/* line 197, ../../app/assets/sass/main.scss */
+.search-results-container.show-list .items-grid {
+  display: none;
+}
+/* line 202, ../../app/assets/sass/main.scss */
+.search-results-container.show-grid .haves-l {
+  display: none;
+}
 
-/* line 204, ../../app/assets/sass/main.scss */
+/* line 215, ../../app/assets/sass/main.scss */
 .ajax-post {
   border: 2px dotted #ff00ff;
 }
 
-/* line 208, ../../app/assets/sass/main.scss */
+/* line 219, ../../app/assets/sass/main.scss */
 .ajax-waiting {
   background: gray;
 }
 
-/* line 212, ../../app/assets/sass/main.scss */
+/* line 223, ../../app/assets/sass/main.scss */
 .ajax-failed {
   background: red;
 }
 
-/* line 218, ../../app/assets/sass/main.scss */
+/* line 229, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle {
   display: none;
 }
-/* line 222, ../../app/assets/sass/main.scss */
+/* line 233, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle-active {
   display: inherit;
 }
 
-/* line 228, ../../app/assets/sass/main.scss */
+/* line 239, ../../app/assets/sass/main.scss */
 form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
   display: inline;
 }
-/* line 234, ../../app/assets/sass/main.scss */
+/* line 245, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 239, ../../app/assets/sass/main.scss */
+/* line 250, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 242, ../../app/assets/sass/main.scss */
+/* line 253, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 247, ../../app/assets/sass/main.scss */
+/* line 258, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 251, ../../app/assets/sass/main.scss */
+/* line 262, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 259, ../../app/assets/sass/main.scss */
+/* line 270, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 265, ../../app/assets/sass/main.scss */
+/* line 276, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 267, ../../app/assets/sass/main.scss */
+/* line 278, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }

@@ -13,7 +13,7 @@ import SQ._
  * This model is created manually through anorm
  */
 
-case class Location(geohash:String, zipcode:Option[String], latlng:LatLng, id:Long) {
+case class Location(zipcode:Option[String], latlng:LatLng, id:Long) {
 
 }
 
@@ -21,16 +21,16 @@ object Location extends core.Common {
 
 	def get(id:Long):Location = {
 		DB.withConnection { implicit c =>
-			val tup:(String, String, String, Long) = SQL(s"SELECT geohash, zipcode, ST_AsText(latlng) as geom, id FROM locations WHERE id = '$id'").as((str("geohash") ~ str("zipcode") ~ str("geom") ~ long("id")).map(flatten) single)
-			Location(tup._1, Some(tup._2), LatLng.fromWKT(tup._3), tup._4)
+			val tup:(String, String, Long) = SQL(s"SELECT zipcode, ST_AsText(latlng) as geom, id FROM locations WHERE id = '$id'").as((str("zipcode") ~ str("geom") ~ long("id")).map(flatten) single)
+			Location(Some(tup._1), LatLng.fromWKT(tup._2), tup._3)
 		}
 	}
 
 	def fromZipcode(zip:String):Location = {
 		DB.withConnection { implicit c =>
-			val tup:Option[(String, String, String, Long)] = SQL(s"SELECT geohash, zipcode, ST_AsText(latlng) as geom, id FROM locations WHERE zipcode = '$zip'").as((str("geohash") ~ str("zipcode") ~ str("geom") ~ long("id")).map(flatten) singleOpt)
+			val tup:Option[(String, String, Long)] = SQL(s"SELECT zipcode, ST_AsText(latlng) as geom, id FROM locations WHERE zipcode = '$zip'").as((str("zipcode") ~ str("geom") ~ long("id")).map(flatten) singleOpt)
 			tup.map { tup =>
-				Location(tup._1, Some(tup._2), LatLng.fromWKT(tup._3), tup._4)
+				Location(Some(tup._1), LatLng.fromWKT(tup._2), tup._3)
 			}
 			.getOrElse {
 				throw new Exception("unknown zip code: " + zip)

@@ -122,76 +122,87 @@ select {
     @include span-columns(10 omega);
   }
 }
+.search-results-container {
+  .items-list {
+    table {
+      $thumb-size: 50px;
+      width: 100%;
 
-.haves-list {
-  table {
-    $thumb-size: 50px;
-    width: 100%;
+      tr {
+        position: relative;
 
-    tr {
-      position: relative;
-
-      th {
-        &.image {
-          width: $thumb-size + 20px;
-        }
-      }
-
-      td {
-
-        &.image {
-          width: $thumb-size;
-          img.thumb {
-            width: $thumb-size;
-            height: $thumb-size;
+        th {
+          &.image {
+            width: $thumb-size + 20px;
           }
         }
 
-      }
+        td {
 
-      .actions {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 150px;
+          &.image {
+            width: $thumb-size;
+            img.thumb {
+              width: $thumb-size;
+              height: $thumb-size;
+            }
+          }
 
-        a {
-          visibility: hidden;
-          margin: auto 5px;
         }
-      }
 
-      &:hover {
         .actions {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 150px;
+
           a {
-            visibility: visible;
+            visibility: hidden;
+            margin: auto 5px;
+          }
+        }
+
+        &:hover {
+          .actions {
+            a {
+              visibility: visible;
+            }
           }
         }
       }
     }
   }
-}
 
-.haves-grid {
-  .item {
-    @include span-columns(3);
-    $L: columns(3, 12, static);
-    height: 200px;
-    &:nth-child(4n) {
-      @include omega;
+  .items-grid {
+    .item {
+      @include span-columns(3);
+      $L: columns(3, 12, static);
+      height: 200px;
+      &:nth-child(4n) {
+        @include omega;
+      }
+
+      .description {
+        //position: absolute;
+        display: none;
+      }
+
+      .thumb {
+        width: $L;
+        height: auto;
+      }
     }
+  }
 
-    .description {
-      //position: absolute;
+  &.show-list {
+    .items-grid {
       display: none;
     }
-
-    .thumb {
-      width: $L;
-      height: auto;
+  }
+  &.show-grid {
+    .items-list {
+      display: none;
     }
   }
-
 }
 
 body {

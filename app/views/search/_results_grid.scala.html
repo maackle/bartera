@@ -1,15 +1,11 @@
-@(results:Seq[Search.SearchResultHave])(implicit request:Request[_])
+@(results:Seq[Search.SearchResult[_ <: ItemBase]])(implicit request:Request[_])
 
-@if(results.isEmpty) {
-    <div class="empty-notice">No results.</div>
-} else {
-    <h2>Results</h2>
-    <div class="search-results haves-grid">
+    <div class="search-results items-grid">
 
-        @for(Search.SearchResultHave(distance_km, have) <- results; thumbURL = have.imageObjects.headOption.map(_.url(200, (200 / core.Helper.PHI).toInt)).getOrElse(core.Common.noImageURL(100)); distance_mi = distance_km*0.621371 ) {
+        @for(Search.SearchResult(distance_km, item) <- results; thumbURL = item.imageObjects.headOption.map(_.url(200, (200 / core.Helper.PHI).toInt)).getOrElse(core.Common.noImageURL(100)); distance_mi = distance_km*0.621371 ) {
             <div class="item">
                 <div class="image"><img class="thumb" src="@thumbURL" /></div>
-                <div class="what"><a href="@routes.Haves.detail(have.id)">@have.what</a></div>
+                <div class="what"><a href="@routes.Haves.detail(item.id)">@item.what</a></div>
                 <div class="distance">
                     @if(distance_mi >= 100) {
                         @("%,1.0f".format(distance_mi))
@@ -18,10 +14,8 @@
                     }
                     miles
                 </div>
-                <div class="description">@have.description</div>
+                <div class="description">@item.description</div>
             </div>
         }
 
     </div>
-}
-

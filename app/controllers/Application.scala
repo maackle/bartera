@@ -10,7 +10,7 @@ object Application extends Common {
   
 	def index = Action { implicit request =>
 		DBEngine.current(Play.current)
-		Ok(views.html.index("Your new application is ready."))
+		Ok(views.html.index())
 	}
 
 	def viewImage(image_id:Long, width:Int, height:Int) = Action {

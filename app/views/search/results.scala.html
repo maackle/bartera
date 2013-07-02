@@ -1,8 +1,22 @@
-@(formHave:Form[_], results:Seq[Search.SearchResultHave])(implicit request:Request[_])
+@(formHave:Form[_], results:Seq[Search.SearchResult[_ <: ItemBase]])(implicit request:Request[_])
 
 @_base("search") {
 
     @views.html.search._search_haves_form(formHave)
 
-    @views.html.search._results_grid(results)
+    @if(results.isEmpty) {
+        <div class="empty-notice">No results.</div>
+    } else {
+
+        <ul class="button-group search-view-options">
+            <li><button class="button small" data-view="list">list</button></li>
+            <li><button class="button small" data-view="grid">grid</button></li>
+        </ul>
+
+        <h2>Results</h2>
+        <div class="search-results-container show-grid">
+            @views.html.search._results_grid(results)
+            @views.html.search._results_list(results)
+        </div>
+    }
 }

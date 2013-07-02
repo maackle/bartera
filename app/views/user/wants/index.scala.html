@@ -1,0 +1,14 @@
+@(addForm:Form[_], wants:Seq[Want])(implicit request:Request[_])
+
+@_base("wants") {
+
+    <h1>Wants</h1>
+
+    <div class="panel">
+        <h3>Add a Want</h3>
+        @views.html.user.wants._add_form(addForm)
+    </div>
+    <hr style="margin-top: 40px;"/>
+    <h3>Your Wants</h3>
+    @views.html.items._list(wants, routes.Wants.edit)
+}

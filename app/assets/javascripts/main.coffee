@@ -3,13 +3,14 @@ $ ->
 
   class UploadForm
 
-    constructor: (@$container, @have_id) ->
+    constructor: (@$container, object_type, @item_id) ->
+      @uri_base = "/#{object_type}/#{@item_id}"
       @$gallery = @$container.find('.gallery')
       @$fileinput = -> this.$container.find('input[type=file]')
 
     initialize: ->
       fu = @$fileinput().fileupload
-        url: "/haves/#{@have_id}/image"
+        url: "#{ @uri_base }/image"
         dataType: "json"
         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
         disableImageResize: false
@@ -49,7 +50,7 @@ $ ->
         $thumb = $(e.target).closest('.thumb')
         img_id = $thumb.attr('data-id')
         x = $.ajax
-          url: "/haves/#{ @have_id }/image/#{ img_id }"
+          url: "#{ @uri_base }/image/#{ img_id }"
           type: 'delete'
 
         x.done (data) =>
@@ -71,10 +72,17 @@ $ ->
         @$container.find('.empty-notice').show()
 
 
-  for form in $('.have-edit-form')
-    console.log form
-    addHaveForm = new UploadForm($(form), $(form).attr('data-object-id'))
+  for form in $('.item-edit-form')
+    addHaveForm = new UploadForm($(form), $(form).attr('data-object-type'), $(form).attr('data-object-id'))
     addHaveForm.initialize()
+
+  $('.search-view-options button').on 'click', (e)->
+    type = $(this).attr('data-view')
+    if type == 'list'
+      $('.search-results-container').removeClass('show-grid').addClass('show-list')
+    else
+      $('.search-results-container').removeClass('show-list').addClass('show-grid')
+
 
 #  $(document).bind 'dragover', (e) ->
 #    dropZone = $('.dropzone')

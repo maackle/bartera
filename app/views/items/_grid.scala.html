@@ -1,0 +1,14 @@
+@(items:Seq[ItemBase], action:(Long)=>Call)(implicit request:Request[_])
+
+<div class="search-results items-grid">
+
+    @for(item <- items; thumbURL = item.imageObjects.headOption.map(_.url(200, (200 / core.Helper.PHI).toInt)).getOrElse(core.Common.noImageURL(100))) {
+        <div class="item">
+            <div class="image"><img class="thumb" src="@thumbURL" /></div>
+            <div class="what"><a href="@action(item.id)">@item.what</a></div>
+
+            <div class="description">@item.description</div>
+        </div>
+    }
+
+    </div>

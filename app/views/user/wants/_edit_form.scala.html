@@ -1,0 +1,46 @@
+@(form:Form[_], want:Want)(implicit request: Request[_])
+@helper.form(
+    controllers.routes.Wants.update(want.id),
+    'class -> "upload-form item-edit-form",
+    'enctype -> "multipart/form-data",
+    Symbol("data-object-id") -> want.id.toString,
+    Symbol("data-object-type") -> want.meta.namePlural
+) {
+        @helper.inputText(form("what"))
+        @helper.textarea(form("description"))
+
+        <div class="align-right">
+            <input type="submit" value="Update" class="button" />
+            <a href="@routes.Wants.index" class="button secondary">Cancel</a>
+        </div>
+
+        <div class="panel">
+            <h3>Images</h3>
+            <div class="gallery">
+                <div class="empty-notice @if( ! want.imageObjects.isEmpty) { no-show }">No images.  Upload some!</div>
+            @if(want.imageObjects.isEmpty) {
+            } else {
+                @for(im <- want.imageObjects; url = im.thumbURL) {
+                    <div class="thumb" data-id="@im.id">
+                        <div class="controls">
+                            <a class="delete" href="#">&times;</a>
+                        </div>
+                        <img src="@url" />
+                    </div>
+                }
+            }
+            </div>
+            <div class="button small adder">
+                + Upload Images
+            </div>
+            <input name="images[]" type="file" class="file-add-input" multiple />
+        </div>
+
+
+    }
+
+    @form.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }

@@ -1,10 +1,7 @@
-@(results:Seq[Search.SearchResultHave])(implicit request:Request[_])
+@(results:Seq[Search.SearchResult[_ <: ItemBase]])(implicit request:Request[_])
 
-@if(results.isEmpty) {
-    <div class="empty-notice">No results.</div>
-} else {
-    <h2>Results</h2>
-    <div class="search-results haves-list">
+
+    <div class="search-results items-list">
         <table>
             <thead>
                 <tr>
@@ -15,12 +12,12 @@
                 </tr>
             </thead>
             <tbody>
-            @for(Search.SearchResultHave(distance_km, have) <- results; thumbURL = have.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50)); distance_mi = distance_km*0.621371 ) {
+            @for(Search.SearchResult(distance_km, item) <- results; thumbURL = item.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50)); distance_mi = distance_km*0.621371 ) {
                 <tr>
                     <td class="image">
                         <img class="thumb" src="@thumbURL" />
                     </td>
-                    <td><a href="@routes.Haves.detail(have.id)">@have.what</a></td>
+                    <td><a href="@routes.Haves.detail(item.id)">@item.what</a></td>
                     <td>@if(distance_mi >= 100) {
                         @("%,1.0f".format(distance_mi))
                     } else {
@@ -28,12 +25,10 @@
                     }
                         miles
                     </td>
-                    <td>@have.description</td>
+                    <td>@item.description</td>
                 </tr>
             }
             </tbody>
         </table>
 
     </div>
-}
-

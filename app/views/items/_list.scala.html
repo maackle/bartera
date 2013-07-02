@@ -1,0 +1,25 @@
+@(items:Seq[ItemBase], action:(Long)=>Call)(implicit request:Request[_])
+
+<div class="items-list">
+    <table>
+        <thead>
+            <tr>
+                <th class="image"></th>
+                <th class="what">what</th>
+                <th class="description">description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for(item <- items; thumbURL = item.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50)) ) {
+                <tr>
+                    <td class="image">
+                        <img class="thumb" src="@thumbURL" />
+                    </td>
+                    <td><a href="@action(item.id)">@item.what</a></td>
+                    <td>@item.description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

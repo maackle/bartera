@@ -1,18 +1,24 @@
 @(form:Form[_], have:Have)(implicit request: Request[_])
 
-    @helper.form(controllers.routes.Haves.update(have.id), 'class -> "upload-form have-edit-form", 'enctype -> "multipart/form-data", Symbol("data-object-id") -> have.id.toString) {
-        @helper.inputText(form("what"))
-        @helper.textarea(form("description"))
+@helper.form(
+    controllers.routes.Haves.update(have.id),
+    'class -> "upload-form item-edit-form",
+    'enctype -> "multipart/form-data",
+    Symbol("data-object-id") -> have.id.toString,
+    Symbol("data-object-type") -> have.meta.namePlural
+) {
+    @helper.inputText(form("what"))
+    @helper.textarea(form("description"))
 
-        <div class="align-right">
-            <input type="submit" value="Update" class="button" />
-            <a href="@routes.Haves.index" class="button secondary">Cancel</a>
-        </div>
+    <div class="align-right">
+        <input type="submit" value="Update" class="button" />
+        <a href="@routes.Haves.index" class="button secondary">Cancel</a>
+    </div>
 
-        <div class="panel">
-            <h3>Images</h3>
-            <div class="gallery">
-                <div class="empty-notice @if( ! have.imageObjects.isEmpty) { no-show }">No images.  Upload some!</div>
+    <div class="panel">
+        <h3>Images</h3>
+        <div class="gallery">
+            <div class="empty-notice @if( ! have.imageObjects.isEmpty) { no-show }">No images.  Upload some!</div>
             @if(have.imageObjects.isEmpty) {
             } else {
                 @for(im <- have.imageObjects; url = im.thumbURL) {
@@ -24,18 +30,18 @@
                     </div>
                 }
             }
-            </div>
-            <div class="button small adder">
-                + Upload Images
-            </div>
-            <input name="images[]" type="file" class="file-add-input" multiple />
         </div>
+        <div class="button small adder">
+            + Upload Images
+        </div>
+        <input name="images[]" type="file" class="file-add-input" multiple />
+    </div>
 
 
-    }
+}
 
-    @form.globalError.map { error =>
-        <p class="error">
-            @error.message
-        </p>
-    }
+@form.globalError.map { error =>
+    <p class="error">
+        @error.message
+    </p>
+}

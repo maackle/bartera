@@ -1,0 +1,13 @@
+@(addForm:Form[_])(implicit request: Request[_])
+
+    @helper.form(routes.Wants.add, 'enctype -> "multipart/form-data") {
+        @helper.inputText(addForm("what"))
+        @helper.textarea(addForm("description"))
+        <input type="submit" value="Add" class="button" />
+    }
+
+    @addForm.globalError.map { error =>
+        <p class="error">
+            @error.message
+        </p>
+    }

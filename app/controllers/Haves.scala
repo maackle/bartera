@@ -7,24 +7,22 @@ import play.api.libs.json.Json
 import play.api.mvc.Action
 
 import SQ._
+import views.html.helper.form
 
-object Haves extends Secured {
+object Haves extends Items[Have] {
 
-	val havesPerPage = 25
+	val table = Have.table
 
-	def userHaves(page:Int = 0)(implicit user:User) = transaction {
-		user.haves.drop(page*havesPerPage).take(havesPerPage).toArray
-	}
+	def userToItems(implicit user:User) = user.haves
 
 	def index = IsAuthenticated { implicit user => implicit request =>
-		val haves:Seq[Have] = Seq()
-		Ok(views.html.user.haves.index(Forms.addHave, userHaves(0)))
+		Ok(views.html.user.haves.index(Forms.addHave, userItems(0)))
 	}
 
 	def add = IsAuthenticated { implicit user => implicit request =>
 
 		Forms.addHave.bindFromRequest().fold (
-			form => BadRequest(views.html.user.haves.index(form, userHaves(0)))
+			form => BadRequest(views.html.user.haves.index(form, userItems(0)))
 //			form => BadRequest(form.errorsAsJson)
 			,
 			have => {
@@ -35,7 +33,7 @@ object Haves extends Secured {
 	}
 
 	def detail(have_id:Long) = Action { implicit request =>
-		transaction(Have.table.lookup(have_id)).map { have =>
+		transaction(table.lookup(have_id)).map { have =>
 			Ok(views.html.haves.detail(have))
 		}
 		.getOrElse {
@@ -45,7 +43,7 @@ object Haves extends Secured {
 	}
 
 	def edit(have_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		transaction(Have.table.lookup(have_id)).map { have =>
+		transaction(table.lookup(have_id)).map { have =>
 			Ok(views.html.user.haves.edit(Forms.editHave.fill(have), have))
 		}
 		.getOrElse {
@@ -56,59 +54,14 @@ object Haves extends Secured {
 
 	def update(have_id:Long) = IsAuthenticated { implicit user => implicit request =>
 		Forms.editHave.bindFromRequest().fold (
-			form => BadRequest(views.html.user.haves.index(form, userHaves(0)))
+			form => BadRequest(views.html.user.haves.index(form, userItems(0)))
 			,
 			have => transaction {
 				have.id = have_id
-				Have.table.update(have)
+				table.update(have)
 				Redirect(routes.Haves.index)
 			}
 		)
-	}
-
-
-	def save = IsAuthenticated { implicit user => implicit request =>
-
-		Forms.addHave.bindFromRequest().fold (
-			form => BadRequest(form.errorsAsJson)
-			,
-			item => Ok(item.toString)
-		)
-	}
-
-	def addImage(have_id:Long) = IsAuthenticated(parse.multipartFormData) { implicit user => implicit request =>
-		val images = transaction {
-//			val have_id = request.body.dataParts.get("have_id").map(_.head).get.toLong
-
-			val have = Have.table.get(have_id)
-
-			request.body.files map { f =>
-				val file = f.ref.file
-				val im = ItemImage.create(f.ref.file, f.contentType.get)
-				ItemImage.table.insert(im)
-				have.images.associate(im)
-				im
-			}
-		}
-
-		require(images.length == 1, "there should only be one image uploaded at a time")
-
-		AjaxSuccess(Json.toJson(Map("image" -> images.head.id))).toResult
-	}
-
-	def deleteImage(have_id:Long, image_id:Long) = IsAuthenticated { implicit user => implicit request =>
-		val success = transaction {
-			val have = Have.table.get(have_id)
-			val image = ItemImage.table.get(image_id)
-			have.images.dissociate(image)
-
-		}
-		if(success) {
-			AjaxSuccess().toResult
-		}
-		else {
-			AjaxError("couldn't delete image").toResult
-		}
 	}
 
 	object Forms {
@@ -130,6 +83,6 @@ object Haves extends Secured {
 			( Have(_, _, user.id) )
 			( item => Some(item.what, item.description) )
 		)
-
 	}
+
 }

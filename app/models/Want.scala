@@ -1,5 +1,7 @@
 package models
 
+import SQ._
+
 case class Want(
 						what: String,
 						description: String = "",
@@ -11,10 +13,15 @@ case class Want(
 
 	def meta = Want
 
+	lazy val detailURL = controllers.routes.Haves.detail(id)
+
 }
 
-object Want extends MetaModel[Want] {
+object Want extends ItemBaseMeta[Want] {
 	val table = Schema.wants
+
+	val nameSingle = "want"
+	val namePlural = "wants"
 }
 
 //
