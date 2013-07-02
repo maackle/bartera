@@ -1,0 +1,22 @@
+
+{
+    "goods": {
+        "pets": {
+            "cats":{},
+            "dogs":{},
+            "honey badgers":{}
+        },
+        "vodka":{}
+    },
+    "services": {
+        "health": {
+            "massage": {},
+            "physical training": {}
+        },
+        "construction": {
+            "hammering":{},
+            "nailing":{},
+            "screwing":{}
+        }
+    }
+}

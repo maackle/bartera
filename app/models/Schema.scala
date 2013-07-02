@@ -19,6 +19,7 @@ object Schema extends org.squeryl.Schema {
 	val zipcodes = table[models.Zipcode]
 
 	val itemImages = table[models.ItemImage]
+	val itemCategories = table[models.ItemCategory]
 
 	val userHaves = oneToManyRelation(users, haves).via((u, i) => u.id === i.user_id)
 	val userWants = oneToManyRelation(users, wants).via((u, i) => u.id === i.user_id)

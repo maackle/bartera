@@ -44,6 +44,7 @@ GET        /search/wants                                 controllers.Search.want
 ### DEV routes ##############################################################################################
 
 GET        /dev/schema/rebuild                           controllers.dev.Schema.rebuild
+GET        /dev/populate/categories                      controllers.dev.Populator.buildCategories
 GET        /dev/populate/:haves/:images                  controllers.dev.Populator.populate(haves:Int, images:Int)
 
 ### static ##################################################################################################

@@ -8,18 +8,19 @@ import ExecutionContext.Implicits.global
 import org.jsoup.Jsoup
 import scala.collection.JavaConversions
 import JavaConversions._
-import models.{SQ, ItemImage, Have, User}
+import models._
 import de.svenjacobs.loremipsum.LoremIpsum
-import scala.concurrent.duration._
-import scala.util.{Success, Failure}
 
 import uk.co.halfninja.randomnames
 import uk.co.halfninja.randomnames.Gender
 
 import SQ._
+import play.api.libs.json.{JsObject, JsValue, Json}
+import scala.util.Failure
+import scala.Some
+import scala.util.Success
 
 object Populator extends Common {
-
 
 	private def lorem = new LoremIpsum()
 	private val namegen = randomnames.NameGenerators.standardGenerator()
@@ -89,24 +90,30 @@ object Populator extends Common {
 		Ok(haves.mkString(", "))
 	}
 
-	def scrape = Action {
-		val key = "dogs"
-		val url = "https://www.google.com/search?hl=en&authuser=0&site=imghp&tbm=isch&source=hp&q=%s&btnG=Search+by+image&gbv=1&sei=TPm7UcfsGIWeqQH34YGwBA".format(key)
-		val page = Jsoup.connect(url)
-			.userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-			.referrer("http://www.google.com")
-			.get()
-		val imgs = page.getElementsByTag("img")
-		val srcs = for(img <- imgs.iterator) yield {
-			img.attr("src")
+	def buildCategories = Action {
+		val is = play.api.Play.getFile("conf/categories.json")
+		val jsonString = io.Source.fromFile(is).getLines.mkString("\n")
+		val root = Json.parse(jsonString)
+		transaction {
+			ItemCategory.table.deleteWhere(i => i.id <> -1)
+			for((k, v) <- root.as[JsObject].value) {
+				cons(ItemCategory.table.insert(ItemCategory(k, None)), v)
+			}
 		}
-		Ok(srcs.mkString(", "))
-//		Async {
-//			WS.url(url).get().map { response =>
-//
-//				val images = (response.xml \ "img")
-//				Ok(images)
-//			}
-//		}
+
+		def cons(cat:ItemCategory, v:JsValue):Unit = {
+			val m = v.as[JsObject].value
+			if(m.isEmpty) {
+
+			} else {
+				for((k, v) <- m) {
+					val newCat = ItemCategory(k, Some(cat.id))
+					cons(ItemCategory.table.insert(newCat), v)
+				}
+			}
+
+		}
+
+		Ok("categories built")
 	}
 }
