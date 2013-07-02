@@ -96,9 +96,10 @@ object Populator extends Common {
 		val root = Json.parse(jsonString)
 		transaction {
 			ItemCategory.table.deleteWhere(i => i.id <> -1)
-			for((k, v) <- root.as[JsObject].value) {
-				cons(ItemCategory.table.insert(ItemCategory(k, None)), v)
-			}
+			cons(ItemCategory.table.insert(ItemCategory("ROOT", None)), root)
+//			for((k, v) <- root.as[JsObject].value) {
+//				cons(ItemCategory.table.insert(ItemCategory(k, None)), v)
+//			}
 		}
 
 		def cons(cat:ItemCategory, v:JsValue):Unit = {
@@ -111,7 +112,6 @@ object Populator extends Common {
 					cons(ItemCategory.table.insert(newCat), v)
 				}
 			}
-
 		}
 
 		Ok("categories built")
