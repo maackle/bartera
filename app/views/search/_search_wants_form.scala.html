@@ -1,10 +1,10 @@
 @(form:Form[_])(implicit request:Request[_])
 
-@helper.form(routes.Search.haves, 'class -> "search-haves-form") {
+@helper.form(routes.Search.wants, 'class -> "search-items-form") {
 
     @helper.inputText(form("q"), '_label -> "Find people who want:", '_class -> "query")
     @if(User.currentUser.isDefined) {
-        @defining(User.currentUser.get.profile.zipcode) { zipcode =>
+        @defining(request.session.get("zipcode").getOrElse("")) { zipcode =>
             @helper.input(form("zipcode"), '_class -> "zipcode") { (id, name, value, params) =>
                <input type="hidden" id="@id" name="@name" value="@zipcode" />
                @Html(zipcode)

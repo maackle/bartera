@@ -1,0 +1,10 @@
+@(form:Form[_])(implicit request:Request[_])
+
+@_base("set location") {
+    <div class="align-left" style="width: 50%">
+        @helper.form(routes.Application.updateLocation) {
+            @helper.inputText(form("zipcode"))
+        }
+    </div>
+
+}

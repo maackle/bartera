@@ -7068,19 +7068,20 @@ select {
 }
 /* line 177, ../../app/assets/sass/main.scss */
 .items-grid .item .thumb {
-  width: 13.01em;
+  max-width: 13.01em;
+  max-height: 6.505em;
   height: auto;
 }
 
-/* line 188, ../../app/assets/sass/main.scss */
-.search-haves-form .zipcode {
+/* line 189, ../../app/assets/sass/main.scss */
+.search-items-form .zipcode {
   width: 15.15262%;
   float: left;
   margin-right: 1.81686%;
   display: inline;
 }
-/* line 192, ../../app/assets/sass/main.scss */
-.search-haves-form .category {
+/* line 193, ../../app/assets/sass/main.scss */
+.search-items-form .category {
   width: 83.03052%;
   float: right;
   margin-right: 0;
@@ -7088,79 +7089,100 @@ select {
   display: inline;
 }
 
-/* line 201, ../../app/assets/sass/main.scss */
+/* line 202, ../../app/assets/sass/main.scss */
 .search-results-container.show-list .items-grid {
   display: none;
 }
-/* line 206, ../../app/assets/sass/main.scss */
+/* line 207, ../../app/assets/sass/main.scss */
 .search-results-container.show-grid .items-list {
   display: none;
 }
 
-/* line 219, ../../app/assets/sass/main.scss */
+/* line 213, ../../app/assets/sass/main.scss */
+.home-search {
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 215, ../../app/assets/sass/main.scss */
+.home-search .search-haves {
+  width: 49.09157%;
+  float: left;
+  margin-right: 1.81686%;
+  display: inline;
+}
+/* line 218, ../../app/assets/sass/main.scss */
+.home-search .search-wants {
+  width: 49.09157%;
+  float: right;
+  margin-right: 0;
+  *margin-left: -1em;
+  display: inline;
+}
+
+/* line 230, ../../app/assets/sass/main.scss */
 .ajax-post {
   border: 2px dotted #ff00ff;
 }
 
-/* line 223, ../../app/assets/sass/main.scss */
+/* line 234, ../../app/assets/sass/main.scss */
 .ajax-waiting {
   background: gray;
 }
 
-/* line 227, ../../app/assets/sass/main.scss */
+/* line 238, ../../app/assets/sass/main.scss */
 .ajax-failed {
   background: red;
 }
 
-/* line 233, ../../app/assets/sass/main.scss */
+/* line 244, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle {
   display: none;
 }
-/* line 237, ../../app/assets/sass/main.scss */
+/* line 248, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle-active {
   display: inherit;
 }
 
-/* line 243, ../../app/assets/sass/main.scss */
+/* line 254, ../../app/assets/sass/main.scss */
 form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
   display: inline;
 }
-/* line 249, ../../app/assets/sass/main.scss */
+/* line 260, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 254, ../../app/assets/sass/main.scss */
+/* line 265, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 257, ../../app/assets/sass/main.scss */
+/* line 268, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 262, ../../app/assets/sass/main.scss */
+/* line 273, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 266, ../../app/assets/sass/main.scss */
+/* line 277, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 274, ../../app/assets/sass/main.scss */
+/* line 285, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 280, ../../app/assets/sass/main.scss */
+/* line 291, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 282, ../../app/assets/sass/main.scss */
+/* line 293, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }

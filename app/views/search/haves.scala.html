@@ -1,7 +1,24 @@
-@(form:Form[_])(implicit request:Request[_])
+@(form:Form[_], resultsOpt:Option[Seq[Search.SearchResult[_ <: ItemBase]]])(implicit request:Request[_])
 
-@_base("search") {
+@_base("search haves") {
 
     @views.html.search._search_haves_form(form)
 
+    @resultsOpt.map { results =>
+        @if(results.isEmpty) {
+            <div class="empty-notice">No results.</div>
+        } else {
+
+            <ul class="button-group search-view-options">
+                <li><button class="button small" data-view="list">list</button></li>
+                <li><button class="button small" data-view="grid">grid</button></li>
+            </ul>
+
+            <h2>Results</h2>
+            <div class="search-results-container show-grid">
+                @views.html.search._results_list(results)
+                @views.html.search._results_grid(results)
+            </div>
+        }
+    }
 }

@@ -175,13 +175,14 @@ select {
     }
 
     .thumb {
-      width: $L;
+      max-width: $L;
+      max-height: $L/2;
       height: auto;
     }
   }
 }
 
-.search-haves-form {
+.search-items-form {
   .query {
     //@include span-columns(10);
   }
@@ -206,6 +207,16 @@ select {
     .items-list {
       display: none;
     }
+  }
+}
+
+.home-search {
+  @include clearfix;
+  .search-haves {
+    @include span-columns(6);
+  }
+  .search-wants {
+    @include span-columns(6 omega);
   }
 }
 

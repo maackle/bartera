@@ -12,12 +12,13 @@
                 </tr>
             </thead>
             <tbody>
+
             @for(Search.SearchResult(distance_km, item) <- results; thumbURL = item.thumbURLs.headOption.getOrElse(core.Common.noImageURL(50)); distance_mi = distance_km*0.621371 ) {
                 <tr>
                     <td class="image">
                         <img class="thumb" src="@thumbURL" />
                     </td>
-                    <td><a href="@routes.Haves.detail(item.id)">@item.what</a></td>
+                    <td><a href="@item.detailURL">@item.what</a></td>
                     <td>@if(distance_mi >= 100) {
                         @("%,1.0f".format(distance_mi))
                     } else {

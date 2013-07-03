@@ -24,7 +24,12 @@ object Populator extends Common {
 
 	private def lorem = new LoremIpsum()
 	private val namegen = randomnames.NameGenerators.standardGenerator()
-
+	def anyGender = {
+		if(System.currentTimeMillis() % 2 == 0)
+			Gender.male
+		else
+			Gender.female
+	}
 	private def getImage(channel:String):Future[ItemImage] = {
 		if( ! Set("cats", "animals", "technics", "nature", "food").contains(channel)) throw new Exception("Invalid image channel")
 		WS.url("http://lorempixel.com/400/400/%s".format(channel)).get().map { response =>
@@ -73,12 +78,7 @@ object Populator extends Common {
 	}
 
 	def populate(numHaves:Int, numImages:Int = 3) = Action {
-		def anyGender = {
-			if(System.currentTimeMillis() % 2 == 0)
-				Gender.male
-			else
-				Gender.female
-		}
+
 
 		val haves = transaction {
 			val user = User.table.get(1L)
@@ -89,6 +89,46 @@ object Populator extends Common {
 		}
 		Ok(haves.mkString(", "))
 	}
+
+
+	def scrapeCraigslist = Action {
+
+		val url = {
+			val locations = Set("portland", "sfbay", "newyork", "losangeles").toVector
+			def randoLoco = locations((math.random  * locations.size).toInt)
+			"http://%s.craigslist.org/sss".format(randoLoco)
+		}
+
+		val page = Jsoup.connect(url)
+			.userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
+			.referrer("http://www.google.com")
+			.get()
+
+		val user = transaction {
+			val email = namegen.generate(anyGender).toString.toLowerCase.replaceAll("""\s""", ".") + "@gmail.com"
+			User.register(User(email, "1234"))
+		}
+
+		val toc = page.getElementById("toc_rows")
+		val rows = toc.getElementsByClass("row")
+		val items = transaction {
+			{
+				for(row <- rows.iterator) yield {
+					val title = row.getElementsByClass("pl").head.getElementsByTag("a").head.text()
+					val pid = row.attr("data-pid")
+					val lat = row.attr("data-latitude")
+					val lng = row.attr("data-longitude")
+					if(title.toLowerCase.matches(".*(buying|i buy|looking|want|searching).*")) {
+						Want.table.insert(Want(title, title, user.id))
+					} else {
+						Have.table.insert(Have(title, title, user.id))
+					}
+				}
+			}.toList
+		}
+		Ok(items.mkString("\n"))
+	}
+
 
 	def buildCategories = Action {
 		val is = play.api.Play.getFile("conf/categories.json")

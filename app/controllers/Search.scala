@@ -1,6 +1,6 @@
 package controllers
 
-import play.api.mvc.Action
+import play.api.mvc.{Request, Action}
 
 import play.api.data.Form
 import play.api.data.Forms._
@@ -9,14 +9,18 @@ import SQ._
 import anorm._
 import play.api.db.DB
 import org.squeryl.Table
+import controllers.Search.Forms.ItemQuery
 
 object Search extends Common {
 
 	val limitTemp = 20
 
 	object Views {
-		val haves = views.html.search.haves
-		val wants = views.html.search.haves
+		def items(name:String)(implicit request:Request[_]) = {
+			if(name=="haves") views.html.search.haves(_, _)
+			else if (name=="wants") views.html.search.wants(_, _)
+			else ???
+		}
 		val results = views.html.search.results
 	}
 
@@ -26,50 +30,46 @@ object Search extends Common {
 			val location = Location.fromZipcode(zipcode)
 		}
 
+		object ItemQuery {
+			def emptyWithZipcode(implicit request:Request[_]) = ItemQuery("", None, request.session.get("zipcode").getOrElse(""))
+		}
+
 		val items = Form( mapping(
 			"q" -> text,
 			"cat_id" -> optional(longNumber),
 			"zipcode" -> Fields.zipcode
 		)(ItemQuery.apply)(ItemQuery.unapply))
+
 	}
 
 	case class SearchResult[+A <: ItemBase](distance_km:Double, item:A)
 
-	def haves = Action { implicit request =>
-
+	private def items[A <: ItemBase](lookup:(ItemQuery) => Seq[SearchResult[A]], itemType:String) = Action { implicit request =>
+		val view = Views.items(itemType)
 		if(request.queryString.isEmpty) {
-			Ok(Views.haves(Forms.items))
+			Ok(view(Forms.items, None))
 		}
 		else {
-			Forms.items.bindFromRequest.fold(
+			val zipcode = request.session.get("zipcode").getOrElse("")
+			val data = if(zipcode.isEmpty) {
+				request.queryString
+			} else {
+				request.queryString + ("zipcode" -> Seq(zipcode))
+			}
+			Forms.items.bindFromRequest(data).fold(
 				form => {
-					BadRequest(Views.haves(form))
+					BadRequest(view(form, None))
 				},
 				query => {
-					val results = lookupHavesWithDistance(query, limitTemp)
-					Ok(Views.results(Forms.items.fill(query), results))
+					val results = lookup(query)
+					Ok(view(Forms.items.fill(query), Some(results)))
 				}
 			)
 		}
 	}
 
-	def wants = Action { implicit request =>
-
-		if(request.queryString.isEmpty) {
-			Ok(Views.wants(Forms.items))
-		}
-		else {
-			Forms.items.bindFromRequest.fold(
-				form => {
-					BadRequest(Views.wants(form))
-				},
-				query => {
-					val results = lookupWantsWithDistance(query, limitTemp)
-					Ok(Views.results(Forms.items.fill(query), results))
-				}
-			)
-		}
-	}
+	def haves = items(lookupHavesWithDistance(_, limitTemp), "haves")
+	def wants = items(lookupWantsWithDistance(_, limitTemp), "wants")
 
 	private def lookupItemsWithDistance[A <: ItemBase](searchQuery:Forms.ItemQuery, limit:Int)(table:Table[A], fn:(String, String, Long)=>A):Seq[SearchResult[A]] = {
 		val point = searchQuery.location.latlng

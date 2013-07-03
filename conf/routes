@@ -4,6 +4,8 @@
 
 # Home page
 GET        /                                             controllers.Application.index
+GET        /location                                     controllers.Application.editLocation
+POST       /location                                     controllers.Application.updateLocation
 
 GET        /login                                        controllers.Auth.login
 POST       /login                                        controllers.Auth.authenticate
@@ -45,6 +47,7 @@ GET        /search/wants                                 controllers.Search.want
 
 GET        /dev/schema/rebuild                           controllers.dev.Schema.rebuild
 GET        /dev/populate/categories                      controllers.dev.Populator.buildCategories
+GET        /dev/populate/scrape                          controllers.dev.Populator.scrapeCraigslist
 GET        /dev/populate/:haves/:images                  controllers.dev.Populator.populate(haves:Int, images:Int)
 
 ### static ##################################################################################################

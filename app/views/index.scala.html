@@ -7,14 +7,14 @@
         <div class="home-search">
             <div class="search-haves">
                 @helper.form(routes.Search.haves) {
-                    <h2>Find people who HAVE:</h2>
+                    <h3>Find people who HAVE:</h3>
                     <input name="q" type="text" class="search big-search" />
                     <input type="submit" class="button" value="Search" />
                 }
             </div>
             <div class="search-wants">
-                @helper.form(routes.Search.haves) {
-                    <h2>Find people who WANT:</h2>
+                @helper.form(routes.Search.wants) {
+                    <h3>Find people who WANT:</h3>
                     <input name="q" type="text" class="search big-search" />
                     <input type="submit" class="button" value="Search" />
                 }
