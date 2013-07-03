@@ -13,9 +13,9 @@ ssh dev.bartera.org <<ENDSSH
 
 cd ~/bartera
 unzip -of $DIR.zip
+kill `cat current/RUNNING_PID`
 rm current
-kill `current/RUNNING_PID`
 ln -s $DIR current
-./start
+nohup ./start
 
 ENDSSH

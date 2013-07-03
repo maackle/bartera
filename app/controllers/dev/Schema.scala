@@ -37,12 +37,12 @@ object Schema extends Common {
 
 			SQL(
 				"""
-				  |DROP TABLE locations;
+				  |DROP TABLE IF EXISTS locations;
 				""".stripMargin).execute()
-
-			Seq(S.zipcodes, S.haves, S.wants).foreach { table =>
-				SQL(s"SELECT AddGeometryColumn('${table.name}', 'latlng', 4326, 'POINT', 2 );").execute()
-			}
+//
+//			Seq(S.zipcodes, S.haves, S.wants).foreach { table =>
+//				SQL(s"SELECT AddGeometryColumn('${table.name}', 'latlng', 4326, 'POINT', 2 );").execute()
+//			}
 
 			SQL(
 				"""
