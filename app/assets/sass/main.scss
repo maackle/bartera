@@ -110,6 +110,77 @@ select {
   }
 }
 
+.items-list {
+  table {
+    $thumb-size: 75px;
+    width: 100%;
+
+    tr {
+      position: relative;
+
+      th {
+        &.image {
+          width: $thumb-size + 20px;
+        }
+      }
+
+      td {
+
+        &.image {
+          width: $thumb-size;
+          img.thumb {
+            width: $thumb-size;
+            height: $thumb-size;
+          }
+        }
+
+      }
+
+      .actions {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 150px;
+
+        a {
+          visibility: hidden;
+          margin: auto 5px;
+        }
+      }
+
+      &:hover {
+        .actions {
+          a {
+            visibility: visible;
+          }
+        }
+      }
+    }
+  }
+}
+
+.items-grid {
+  @include clearfix;
+  .item {
+    @include span-columns(3);
+    $L: columns(3, 12, static);
+    height: 200px;
+    &:nth-child(4n) {
+      @include omega;
+    }
+
+    .description {
+      //position: absolute;
+      display: none;
+    }
+
+    .thumb {
+      width: $L;
+      height: auto;
+    }
+  }
+}
+
 .search-haves-form {
   .query {
     //@include span-columns(10);
@@ -122,76 +193,9 @@ select {
     @include span-columns(10 omega);
   }
 }
+
+
 .search-results-container {
-  .items-list {
-    table {
-      $thumb-size: 50px;
-      width: 100%;
-
-      tr {
-        position: relative;
-
-        th {
-          &.image {
-            width: $thumb-size + 20px;
-          }
-        }
-
-        td {
-
-          &.image {
-            width: $thumb-size;
-            img.thumb {
-              width: $thumb-size;
-              height: $thumb-size;
-            }
-          }
-
-        }
-
-        .actions {
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 150px;
-
-          a {
-            visibility: hidden;
-            margin: auto 5px;
-          }
-        }
-
-        &:hover {
-          .actions {
-            a {
-              visibility: visible;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  .items-grid {
-    .item {
-      @include span-columns(3);
-      $L: columns(3, 12, static);
-      height: 200px;
-      &:nth-child(4n) {
-        @include omega;
-      }
-
-      .description {
-        //position: absolute;
-        display: none;
-      }
-
-      .thumb {
-        width: $L;
-        height: auto;
-      }
-    }
-  }
 
   &.show-list {
     .items-grid {

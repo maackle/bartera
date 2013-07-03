@@ -16,11 +16,11 @@ object ItemCategory extends MetaModel[ItemCategory] {
 	lazy val Goods = transaction { table.where(c => c.name === "goods" and c.parent_id === Root.id).single }
 	lazy val Services = transaction { table.where(c => c.name === "services" and c.parent_id === Root.id).single }
 
-	def detail = transaction {
+	lazy val tree = transaction {
 
-		def getDetail(parent:ItemCategory):Detail = inTransaction {
-			val kids = table.where(_.parent_id === parent.id).toSet.map(getDetail)
-			val d = new Detail(
+		def makeNode(parent:ItemCategory):Node = inTransaction {
+			val kids = table.where(_.parent_id === parent.id).toSet.map(makeNode)
+			val d = new Node(
 				parent.name,
 				parent,
 				kids,
@@ -29,10 +29,15 @@ object ItemCategory extends MetaModel[ItemCategory] {
 			d
 		}
 
-		getDetail(Root)
+		makeNode(Root)
 	}
 
-	class Detail(val name:String, val model:ItemCategory, val children:Set[Detail], val descendants:Set[Detail])
+	class Node(val name:String, val model:ItemCategory, val children:Set[Node], val descendants:Set[Node]) {
+
+		def toHtmlSelect = {
+
+		}
+	}
 
 
 }

@@ -4,8 +4,10 @@
 
         @for(Search.SearchResult(distance_km, item) <- results; thumbURL = item.imageObjects.headOption.map(_.url(200, (200 / core.Helper.PHI).toInt)).getOrElse(core.Common.noImageURL(100)); distance_mi = distance_km*0.621371 ) {
             <div class="item">
-                <div class="image"><img class="thumb" src="@thumbURL" /></div>
-                <div class="what"><a href="@routes.Haves.detail(item.id)">@item.what</a></div>
+                <a href="@routes.Haves.detail(item.id)">
+                    <div class="image"><img class="thumb" src="@thumbURL" /></div>
+                    <div class="what">@item.what</div>
+                </a>
                 <div class="distance">
                     @if(distance_mi >= 100) {
                         @("%,1.0f".format(distance_mi))

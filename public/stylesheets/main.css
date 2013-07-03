@@ -7004,14 +7004,82 @@ select {
   display: none;
 }
 
-/* line 117, ../../app/assets/sass/main.scss */
+/* line 114, ../../app/assets/sass/main.scss */
+.items-list table {
+  width: 100%;
+}
+/* line 118, ../../app/assets/sass/main.scss */
+.items-list table tr {
+  position: relative;
+}
+/* line 122, ../../app/assets/sass/main.scss */
+.items-list table tr th.image {
+  width: 95px;
+}
+/* line 129, ../../app/assets/sass/main.scss */
+.items-list table tr td.image {
+  width: 75px;
+}
+/* line 131, ../../app/assets/sass/main.scss */
+.items-list table tr td.image img.thumb {
+  width: 75px;
+  height: 75px;
+}
+/* line 139, ../../app/assets/sass/main.scss */
+.items-list table tr .actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 150px;
+}
+/* line 145, ../../app/assets/sass/main.scss */
+.items-list table tr .actions a {
+  visibility: hidden;
+  margin: auto 5px;
+}
+/* line 153, ../../app/assets/sass/main.scss */
+.items-list table tr:hover .actions a {
+  visibility: visible;
+}
+
+/* line 162, ../../app/assets/sass/main.scss */
+.items-grid {
+  overflow: hidden;
+  *zoom: 1;
+}
+/* line 164, ../../app/assets/sass/main.scss */
+.items-grid .item {
+  width: 23.63735%;
+  float: left;
+  margin-right: 1.81686%;
+  display: inline;
+  height: 200px;
+}
+/* line 168, ../../app/assets/sass/main.scss */
+.items-grid .item:nth-child(4n) {
+  float: right;
+  margin-right: 0;
+  *margin-left: -1em;
+  display: inline;
+}
+/* line 172, ../../app/assets/sass/main.scss */
+.items-grid .item .description {
+  display: none;
+}
+/* line 177, ../../app/assets/sass/main.scss */
+.items-grid .item .thumb {
+  width: 13.01em;
+  height: auto;
+}
+
+/* line 188, ../../app/assets/sass/main.scss */
 .search-haves-form .zipcode {
   width: 15.15262%;
   float: left;
   margin-right: 1.81686%;
   display: inline;
 }
-/* line 121, ../../app/assets/sass/main.scss */
+/* line 192, ../../app/assets/sass/main.scss */
 .search-haves-form .category {
   width: 83.03052%;
   float: right;
@@ -7020,140 +7088,79 @@ select {
   display: inline;
 }
 
-/* line 127, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table {
-  width: 100%;
-}
-/* line 131, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr {
-  position: relative;
-}
-/* line 135, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr th.image {
-  width: 70px;
-}
-/* line 142, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr td.image {
-  width: 50px;
-}
-/* line 144, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr td.image img.thumb {
-  width: 50px;
-  height: 50px;
-}
-/* line 152, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr .actions {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 150px;
-}
-/* line 158, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr .actions a {
-  visibility: hidden;
-  margin: auto 5px;
-}
-/* line 166, ../../app/assets/sass/main.scss */
-.search-results-container .items-list table tr:hover .actions a {
-  visibility: visible;
-}
-/* line 176, ../../app/assets/sass/main.scss */
-.search-results-container .items-grid .item {
-  width: 23.63735%;
-  float: left;
-  margin-right: 1.81686%;
-  display: inline;
-  height: 200px;
-}
-/* line 180, ../../app/assets/sass/main.scss */
-.search-results-container .items-grid .item:nth-child(4n) {
-  float: right;
-  margin-right: 0;
-  *margin-left: -1em;
-  display: inline;
-}
-/* line 184, ../../app/assets/sass/main.scss */
-.search-results-container .items-grid .item .description {
-  display: none;
-}
-/* line 189, ../../app/assets/sass/main.scss */
-.search-results-container .items-grid .item .thumb {
-  width: 13.01em;
-  height: auto;
-}
-/* line 197, ../../app/assets/sass/main.scss */
+/* line 201, ../../app/assets/sass/main.scss */
 .search-results-container.show-list .items-grid {
   display: none;
 }
-/* line 202, ../../app/assets/sass/main.scss */
-.search-results-container.show-grid .haves-l {
+/* line 206, ../../app/assets/sass/main.scss */
+.search-results-container.show-grid .items-list {
   display: none;
 }
 
-/* line 215, ../../app/assets/sass/main.scss */
+/* line 219, ../../app/assets/sass/main.scss */
 .ajax-post {
   border: 2px dotted #ff00ff;
 }
 
-/* line 219, ../../app/assets/sass/main.scss */
+/* line 223, ../../app/assets/sass/main.scss */
 .ajax-waiting {
   background: gray;
 }
 
-/* line 223, ../../app/assets/sass/main.scss */
+/* line 227, ../../app/assets/sass/main.scss */
 .ajax-failed {
   background: red;
 }
 
-/* line 229, ../../app/assets/sass/main.scss */
+/* line 233, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle {
   display: none;
 }
-/* line 233, ../../app/assets/sass/main.scss */
+/* line 237, ../../app/assets/sass/main.scss */
 .ajax-toggle-pair .ajax-toggle-active {
   display: inherit;
 }
 
-/* line 239, ../../app/assets/sass/main.scss */
+/* line 243, ../../app/assets/sass/main.scss */
 form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
   display: inline;
 }
-/* line 245, ../../app/assets/sass/main.scss */
+/* line 249, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 250, ../../app/assets/sass/main.scss */
+/* line 254, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 253, ../../app/assets/sass/main.scss */
+/* line 257, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 258, ../../app/assets/sass/main.scss */
+/* line 262, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 262, ../../app/assets/sass/main.scss */
+/* line 266, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 270, ../../app/assets/sass/main.scss */
+/* line 274, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 276, ../../app/assets/sass/main.scss */
+/* line 280, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 278, ../../app/assets/sass/main.scss */
+/* line 282, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }
