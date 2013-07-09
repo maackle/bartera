@@ -7073,22 +7073,6 @@ select {
   height: auto;
 }
 
-/* line 189, ../../app/assets/sass/main.scss */
-.search-items-form .zipcode {
-  width: 15.15262%;
-  float: left;
-  margin-right: 1.81686%;
-  display: inline;
-}
-/* line 193, ../../app/assets/sass/main.scss */
-.search-items-form .category {
-  width: 83.03052%;
-  float: right;
-  margin-right: 0;
-  *margin-left: -1em;
-  display: inline;
-}
-
 /* line 202, ../../app/assets/sass/main.scss */
 .search-results-container.show-list .items-grid {
   display: none;
@@ -7148,41 +7132,43 @@ form dd.info {
   font-size: 0.75em;
   margin-top: -0.75em;
   float: right;
-  display: inline;
+  color: #aaa;
+  display: inline-block;
+  padding: 0 10px;
 }
-/* line 260, ../../app/assets/sass/main.scss */
+/* line 262, ../../app/assets/sass/main.scss */
 form dd.error {
   display: inline-block;
 }
 
-/* line 265, ../../app/assets/sass/main.scss */
+/* line 267, ../../app/assets/sass/main.scss */
 ul {
   list-style: none;
 }
-/* line 268, ../../app/assets/sass/main.scss */
+/* line 270, ../../app/assets/sass/main.scss */
 ul.bulleted {
   list-style: inherit;
 }
 
-/* line 273, ../../app/assets/sass/main.scss */
+/* line 275, ../../app/assets/sass/main.scss */
 ul.inline {
   list-style: none;
 }
-/* line 277, ../../app/assets/sass/main.scss */
+/* line 279, ../../app/assets/sass/main.scss */
 ul.inline li {
   display: inline-block;
 }
 
-/* line 285, ../../app/assets/sass/main.scss */
+/* line 287, ../../app/assets/sass/main.scss */
 table thead.center th {
   text-align: center;
 }
 
-/* line 291, ../../app/assets/sass/main.scss */
+/* line 293, ../../app/assets/sass/main.scss */
 nav {
   color: #999;
 }
-/* line 293, ../../app/assets/sass/main.scss */
+/* line 295, ../../app/assets/sass/main.scss */
 nav .name {
   font-size: 1.2em;
 }

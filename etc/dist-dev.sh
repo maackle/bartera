@@ -7,12 +7,13 @@ PORT=80
 
 cd ~/code/bartera
 play -Dconfig.file=$CONF -Dhttp.port=$PORT dist
+echo "uploading..."
 rsync dist/bartera-$VERSION.zip dev.bartera.org:/home/michael/bartera
-
+echo "DONE"
 ssh dev.bartera.org <<ENDSSH
 
 cd ~/bartera
-unzip -of $DIR.zip
+unzip -o $DIR.zip
 kill `cat current/RUNNING_PID`
 rm current
 ln -s $DIR current

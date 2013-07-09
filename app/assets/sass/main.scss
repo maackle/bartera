@@ -186,13 +186,13 @@ select {
   .query {
     //@include span-columns(10);
   }
-  .zipcode {
-    @include span-columns(2);
-    //min-width: 5em;
-  }
-  .category {
-    @include span-columns(10 omega);
-  }
+  //.zipcode {
+  //  @include span-columns(2);
+  //  //min-width: 5em;
+  //}
+  //.category {
+  //  @include span-columns(10 omega);
+  //}
 }
 
 
@@ -255,7 +255,9 @@ form {
     font-size: 0.75em;
     margin-top: -0.75em;
     float: right;
-    display: inline;
+    color: #aaa;
+    display: inline-block;
+    padding: 0 10px;
   }
   dd.error {
     display: inline-block;

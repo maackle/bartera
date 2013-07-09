@@ -3,9 +3,10 @@
 @helper.form(routes.Search.haves, 'class -> "search-items-form") {
 
     @helper.inputText(form("q"), '_label -> "Find people who have:", '_class -> "query")
+    <!--
     @if(User.currentUser.isDefined) {
         @defining(request.session.get("zipcode").getOrElse("")) { zipcode =>
-        @helper.input(form("zipcode"), '_class -> "zipcode") { (id, name, value, params) =>
+            @helper.input(form("zipcode"), '_class -> "zipcode") { (id, name, value, params) =>
                <input type="hidden" id="@id" name="@name" value="@zipcode" />
                @Html(zipcode)
             }
@@ -13,6 +14,7 @@
     } else {
         @helper.inputText(form("zipcode"), '_label -> "ZIP", '_class -> "zipcode")
     }
+    -->
     @helper.select(form("cat_id"), Seq("1"->"Cats"), '_label -> "In category:", '_class -> "category")
     <input type="submit" value="Search" />
 }

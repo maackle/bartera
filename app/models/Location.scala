@@ -8,6 +8,8 @@ import anorm.~
 import scala.Some
 import core.{LatLng}
 import SQ._
+import play.api.mvc.Request
+import controllers.dev.Settings
 
 /**
  * This model is created manually through anorm
@@ -41,6 +43,15 @@ object Location extends core.Common {
 //				)
 			}
 		}
+	}
+
+	def currentZipcode(implicit request:Request[_]) = {
+		request.session.get("zipcode")
+	}
+
+	def randomZipcode:String = {
+		val zips = Settings.zipcodeSubset.toVector
+		zips((math.random*zips.size).toInt)
 	}
 }
 

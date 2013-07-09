@@ -13,7 +13,12 @@ case class Want(
 
 	def meta = Want
 
-	lazy val detailURL = controllers.routes.Haves.detail(id)
+	lazy val detailURL = controllers.routes.Wants.detail(id)
+
+	def withZipcode(zipcode:String) = {
+		location_id = Location.fromZipcode(zipcode).id
+		this
+	}
 
 }
 

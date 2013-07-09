@@ -19,6 +19,7 @@ import play.api.libs.json.{JsObject, JsValue, Json}
 import scala.util.Failure
 import scala.Some
 import scala.util.Success
+import play.api.Play
 
 object Populator extends Common {
 
@@ -79,7 +80,6 @@ object Populator extends Common {
 
 	def populate(numHaves:Int, numImages:Int = 3) = Action {
 
-
 		val haves = transaction {
 			val user = User.table.get(1L)
 			for(_ <- 1 to numHaves) yield {
@@ -87,7 +87,7 @@ object Populator extends Common {
 				createHave(user, "%s Cat".format(name), numImages, "cats")
 			}
 		}
-		Ok(haves.mkString(", "))
+		Ok(haves.map(h => h.location.zipcode).mkString(", "))
 	}
 
 
@@ -119,9 +119,9 @@ object Populator extends Common {
 					val lat = row.attr("data-latitude")
 					val lng = row.attr("data-longitude")
 					if(title.toLowerCase.matches(".*(buying|i buy|looking|want|searching).*")) {
-						Want.table.insert(Want(title, title, user.id))
+						Want.table.insert(Want(title, title, user.id).withZipcode(Location.randomZipcode))
 					} else {
-						Have.table.insert(Have(title, title, user.id))
+						Have.table.insert(Have(title, title, user.id).withZipcode(Location.randomZipcode))
 					}
 				}
 			}.toList
@@ -131,8 +131,7 @@ object Populator extends Common {
 
 
 	def buildCategories = Action {
-		val is = play.api.Play.getFile("conf/categories.json")
-		val jsonString = io.Source.fromFile(is).getLines.mkString("\n")
+		val jsonString = io.Source.fromInputStream(Play.classloader.getResourceAsStream("conf/categories.json")).getLines.mkString("\n")
 		val root = Json.parse(jsonString)
 		transaction {
 			ItemCategory.table.deleteWhere(i => i.id <> -1)

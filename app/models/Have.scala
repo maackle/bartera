@@ -15,6 +15,11 @@ case class Have(
 	def meta = Have
 
 	lazy val detailURL = controllers.routes.Haves.detail(id)
+
+	def withZipcode(zipcode:String) = {
+		location_id = Location.fromZipcode(zipcode).id
+		this
+	}
 }
 
 object Have extends ItemBaseMeta[Have] {
