@@ -15,6 +15,6 @@
         @helper.inputText(form("zipcode"), '_label -> "ZIP", '_class -> "zipcode")
     }
     -->
-    @helper.select(form("cat_id"), Seq("1"->"Cats"), '_label -> "In category:", '_class -> "category")
+    @helper.select(form("cat_id"), ItemCategory.tree.toPairs, '_label -> "In category:", '_class -> "category")
     <input type="submit" value="Search" />
 }

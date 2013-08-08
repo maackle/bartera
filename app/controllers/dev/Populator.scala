@@ -153,6 +153,8 @@ object Populator extends Common {
 			}
 		}
 
+//		println(ItemCategory.tree.toString)
+
 		Ok("categories built")
 	}
 }

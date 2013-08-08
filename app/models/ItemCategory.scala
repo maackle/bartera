@@ -1,6 +1,7 @@
 package models
 
 import SQ._
+import scala.xml.{NodeSeq, Elem}
 
 case class ItemCategory(name:String, parent_id:Option[Long]) extends Model[AnyRef] with IdPK {
 
@@ -18,25 +19,43 @@ object ItemCategory extends MetaModel[ItemCategory] {
 
 	lazy val tree = transaction {
 
-		def makeNode(parent:ItemCategory):Node = inTransaction {
-			val kids = table.where(_.parent_id === parent.id).toSet.map(makeNode)
+		def makeNode(category:ItemCategory):Node = inTransaction {
+			val kids = table.where(_.parent_id === category.id).toSet.map(makeNode)
 			val d = new Node(
-				parent.name,
-				parent,
+				category.name,
+				category,
 				kids,
 				kids ++ kids.flatMap(_.descendants)
 			)
+			assert(!d.children.contains(d))
 			d
 		}
 
 		makeNode(Root)
 	}
 
-	class Node(val name:String, val model:ItemCategory, val children:Set[Node], val descendants:Set[Node]) {
 
-		def toHtmlSelect = {
 
+	case class Node(val name:String, val model:ItemCategory, val children:Set[Node], val descendants:Set[Node]) {
+
+		def toPairs = {
+
+			def traverse(node:Node, prefix:String):Seq[(String, String)] = {
+				val label = prefix + node.name
+				Seq((node.model.id.toString, label)) ++ node.children.flatMap(traverse(_, label + " > "))
+			}
+
+			traverse(this, "").sortBy(_._2)
 		}
+//		def toHtml = {
+//
+//			def traverse(node:Node, prefix:String):Seq[NodeSeq] = {
+//				val label = prefix + " > " + node.name
+//				<option name={ node.model.id }>{ label }</option> ++ children.flatMap(traverse(_, label))
+//			}
+//
+//			traverse(this, "")
+//		}
 	}
 
 

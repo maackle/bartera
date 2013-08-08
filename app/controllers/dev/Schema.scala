@@ -1,7 +1,7 @@
 package controllers.dev
 
 import anorm._
-import play.api.mvc.{ChunkedResult, Action, Controller}
+import play.api.mvc.{Request, ChunkedResult, Action, Controller}
 import models.{Schema => S, Location, SQ, User}
 import play.api.db.DB
 import controllers.Common
@@ -13,7 +13,7 @@ import play.api.libs.iteratee.{Concurrent, Enumerator}
 
 object Schema extends Common {
 
-	def rebuild = Action {
+	def rebuild = Action { request =>
 
 		transaction {
 			models.Schema.drop
@@ -24,7 +24,7 @@ object Schema extends Common {
 //		initialize(None)
 
 		transaction {
-			seed()
+			seed(request)
 		}
 
 		Ok("schema rebuilt")
@@ -80,9 +80,8 @@ object Schema extends Common {
 
 	}
 
-
-
-	def seed() = inTransaction {
+	def seed(request:Request[_]) = inTransaction {
 		User.register(User("michael@lv11.co", "q1w2e3"))
+		Populator.buildCategories()()(request)
 	}
 }

@@ -46,6 +46,10 @@ select {
   margin: -1px auto;
 }
 
+textarea {
+  min-height: 8em;
+}
+
 .align-left { text-align: left; }
 .align-center { text-align: center; }
 .align-right { text-align: right; }
